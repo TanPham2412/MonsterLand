@@ -2,11 +2,11 @@ package com.example.monsterland;
 
 import java.util.Random;
 
-public class Fight {
+public class Battle {
     GameScreen gameScreen;
     Random random = new Random();
     int percent, randomPercent, randomHP, hp;
-    public Fight(GameScreen gameScreen){
+    public Battle(GameScreen gameScreen){
         this.gameScreen = gameScreen;
     }
     public void random(){
@@ -14,7 +14,7 @@ public class Fight {
         randomHP = 30 + random.nextInt(21);
     }
 
-    public void battle(){
+    public void sneakAttack(){
         random();
         if(percent <= randomPercent){
             hp = gameScreen.monster.monsterHP * randomHP / 10 / 10;

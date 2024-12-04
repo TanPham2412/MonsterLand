@@ -27,9 +27,10 @@ public class GameScreen extends AppCompatActivity {
 
     Dialog dialog;
     Story story = new Story(this);
+    StoryCastle storyCastle = new StoryCastle(this);
     Player player = new Player(this);
     Monster monster = new Monster(this);
-    Fight fight = new Fight(this);
+    Battle battle = new Battle(this);
 
 
 
@@ -103,7 +104,7 @@ public class GameScreen extends AppCompatActivity {
         button2.setTransformationMethod(null);
         button3.setTransformationMethod(null);
 
-        story.opening1();
+        storyCastle.opening1();
     }
     public void button1(View view){
         story.selectPosition(story.nextPosition1);

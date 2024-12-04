@@ -21,9 +21,11 @@ public class Player {
         this.gameScreen = gameScreen;
     }
 
-    public void healingPotion(){
+    public void dropHealingPotion(){
+        healingPotion += 1;
         gameScreen.playerHPTextView.setText("HP: "+playerHp);
         gameScreen.healingPotionTextView.setText("x"+healingPotion);
+        showToast("Bạn nhận được một bình máu sau khi đánh bại kẻ địch", 3000);
     }
 
 
@@ -37,14 +39,17 @@ public class Player {
                 if (playerHp > playerMaxHp) {
                     playerHp = playerMaxHp;
                 }
-                healingPotion();
+                gameScreen.playerHPTextView.setText("HP: "+playerHp);
+                gameScreen.healingPotionTextView.setText("x"+healingPotion);
                 showToast("Bạn đã hồi được " + hpHeal + " hp!", 3000);
             } else {
-                healingPotion();
+                gameScreen.playerHPTextView.setText("HP: "+playerHp);
+                gameScreen.healingPotionTextView.setText("x"+healingPotion);
                 showToast("Hp đã đầy, không thể sử dụng!!!", 3000);
             }
         } else {
-            healingPotion();
+            gameScreen.playerHPTextView.setText("HP: "+playerHp);
+            gameScreen.healingPotionTextView.setText("x"+healingPotion);
             showToast("Bạn không có bình máu!!!", 3000);
         }
     }
