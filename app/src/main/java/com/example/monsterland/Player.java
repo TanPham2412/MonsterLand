@@ -11,8 +11,12 @@ public class Player {
     public int playerHp = 50;
     public int playerMaxHp = 50;
     public String playerWeapon;
+
+    boolean rustyKnife = false, sword = false;
     boolean leatherArmor = false;
+    boolean specialPotion = false;
     Random random = new Random();
+
 
     public int playerAttack, healingPotion = 1, hpHeal, expGain, playerExp, expNeed = 100;
     public int minAtk, maxAtk;
@@ -25,7 +29,6 @@ public class Player {
         healingPotion += 1;
         gameScreen.playerHPTextView.setText("HP: "+playerHp);
         gameScreen.healingPotionTextView.setText("x"+healingPotion);
-        showToast("Bạn nhận được một bình máu sau khi đánh bại kẻ địch", 3000);
     }
 
 
@@ -64,28 +67,6 @@ public class Player {
             }
         }, timeShowMessage);
     }
-    public void playerUseStick(){
-        //2 - 3
-        minAtk = 2;
-        maxAtk = 2;
-        playerWeapon = "Gậy gỗ";
-        gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
-        gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);
-    }
-    public void playerUseRustyKnife(){
-        //3 - 5
-        minAtk += 1;
-        maxAtk += 1;
-        playerWeapon = "Dao rỉ";
-        gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
-        gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);
-    }
-
-    public void playerUseLeaderArmor(){
-        gameScreen.monster.minAtk -= 1;
-        gameScreen.monster.maxAtk -= 1;
-    }
-
     public void playerExpGain(){
         expGain = 60 + random.nextInt(41);
         playerExp += expGain;
@@ -107,11 +88,50 @@ public class Player {
             showToast("Bạn nhận được "+expGain+" exp. Bạn cần thêm "+(expNeed - expGain)+" exp để lên cấp!!!",5000);
         }
     }
+    public void playerUseStick(){
+        //2 - 3
+        minAtk = 2;
+        maxAtk = 2;
+        playerWeapon = "Gậy gỗ";
+        gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
+        gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);
+    }
+    public void playerUseRustyKnife(){
+        //3 - 5
+        minAtk += 1;
+        maxAtk += 1;
+        rustyKnife = true;
+        playerWeapon = "Dao rỉ";
+        gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
+        gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);
+    }
+
+    public void playerUseSword(){
+        //6 - 9
+        if(rustyKnife){
+            minAtk += 3;
+            maxAtk += 5;
+        }
+        else {
+            minAtk += 4;
+            maxAtk += 6;
+        }
+        sword = true;
+        playerWeapon = "Kiếm sắt";
+        gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
+        gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);
+    }
 
     public void playerUseArmor(){
         if (leatherArmor){
             playerUseLeaderArmor();
         }
     }
+
+    public void playerUseLeaderArmor(){
+        gameScreen.monster.minAtk -= 1;
+        gameScreen.monster.maxAtk -= 1;
+    }
+
 }
 

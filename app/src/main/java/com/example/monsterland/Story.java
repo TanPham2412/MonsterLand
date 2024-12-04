@@ -5,7 +5,7 @@ import android.view.View;
 public class Story {
 
     GameScreen gameScreen;
-    String nextPosition1, nextPosition2, nextPosition3, nextPosition;
+    String nextPosition1, nextPosition2, nextPosition3, nextPosition, nextPositionTwo;
 
     public Story(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
@@ -78,6 +78,27 @@ public class Story {
                 break;
             case "notUseLeatherArmor":
                 gameScreen.storyCastle.notUseLeatherArmor();
+                break;
+            case "meetMira":
+                gameScreen.storyCastle.meetMira();
+                break;
+            case "tellTruth":
+                gameScreen.storyCastle.tellTruth();
+                break;
+            case "lie":
+                gameScreen.storyCastle.lie();
+                break;
+            case "refuseAnswer":
+                gameScreen.storyCastle.refuseAnswer();
+                break;
+            case "getOutMiraHome":
+                gameScreen.storyCastle.getOutMiraHome();
+                break;
+            case "knightDead":
+                gameScreen.storyCastle.knightDead();
+                break;
+            case "woodenSign":
+                gameScreen.storyCastle.woodenSign();
                 break;
         }
     }

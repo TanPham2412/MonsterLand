@@ -18,7 +18,7 @@ public class Monster {
     }
 
     public void aMystic(){
-        monsterHP = 100;
+        monsterHP = 10;
         minAtk = 5;
         maxAtk = 11;
         gameScreen.monsterAttackTextView.setText("Atk: ???");

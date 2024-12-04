@@ -122,6 +122,7 @@ public class StoryCastle {
     }
 
     public void intoAlley(){
+        gameScreen.story.nextPositionTwo = "run";
         gameScreen.gameImageView.setImageResource(R.drawable.bandit);
         gameScreen.gameTextView.setText("Thật không may, phía trước có một tên côn đồ. Bạn sẽ làm gì tiếp theo?\n\n");
         gameScreen.monster.bandit();
@@ -140,16 +141,17 @@ public class StoryCastle {
     }
     public void sneakAttack(){
         gameScreen.story.nextPosition = "intoAlley1";
+        gameScreen.story.nextPositionTwo = "run";
         gameScreen.gameImageView.setImageResource(R.drawable.bandit);
         gameScreen.battle.percent = 5;
         gameScreen.battle.sneakAttack();
 
         gameScreen.button1.setText("Tấn công");
-        gameScreen.button2.setText("Bỏ chạy");
+        gameScreen.button2.setText("Bỏ chạy (30%)");
         gameScreen.button3.setText("");
 
         gameScreen.story.nextPosition1 = "attack";
-        gameScreen.story.nextPosition2 = "run";
+        gameScreen.story.nextPosition2 = gameScreen.story.nextPositionTwo;
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
@@ -184,8 +186,9 @@ public class StoryCastle {
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
             gameScreen.player.playerExpGain();
-            if(gameScreen.battle.percent <=7) {
+            if(gameScreen.battle.percent <=6) {
                 gameScreen.player.dropHealingPotion();
+                gameScreen.gameTextView.setText("Bạn đã thành công đánh bại kẻ địch!! Bạn nhận được một bình máu!");
             }
             gameScreen.monsterAttackTextView.setText("");
             gameScreen.monsterHPTextView.setText("");
@@ -209,7 +212,7 @@ public class StoryCastle {
             gameScreen.button3.setText("");
 
             gameScreen.story.nextPosition1 = "attack";
-            gameScreen.story.nextPosition2 = "run";
+            gameScreen.story.nextPosition2 = gameScreen.story.nextPositionTwo;
             gameScreen.story.nextPosition3 = "";
 
             gameScreen.button3.setVisibility(View.INVISIBLE);
@@ -341,6 +344,7 @@ public class StoryCastle {
         gameScreen.monsterAttackTextView.setText("");
     }
     public void keepGoing(){
+        gameScreen.story.nextPositionTwo = "run";
         gameScreen.story.nextPosition = "leatherArmor";
         gameScreen.gameImageView.setImageResource(R.drawable.gatekeeper);
         gameScreen.gameTextView.setText("Bạn đến trước cổng thành. Ở phía trước có người gác cổng!!!");
@@ -423,7 +427,7 @@ public class StoryCastle {
         gameScreen.button2.setText("");
         gameScreen.button3.setText("");
 
-        gameScreen.story.nextPosition1 = "alley";
+        gameScreen.story.nextPosition1 = "outsideCastle";
         gameScreen.story.nextPosition2 = "";
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
@@ -442,6 +446,141 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void meetMira(){
+        gameScreen.gameImageView.setImageResource(R.drawable.mira);
+        gameScreen.gameTextView.setText("Bạn đến gặp Mira\n\nMira nhìn bạn một lúc lâu, đôi mắt có chút lo lắng. Cô hỏi:\n\n'Ngươi có thể nói cho ta rõ hơn về vết thương này không? Nó là vết thương cũ hay là dấu hiệu của sự nguy hiểm? Nếu cần ta sẵn sàng giúp, nhưng ta cần phải biết sự thật.'");
+
+        gameScreen.story.showAllButton();
+
+        gameScreen.button1.setText("Bạn thú nhận sự thật");
+        gameScreen.button2.setText("Nói dối đây là vết thương cũ");
+        gameScreen.button3.setText("Bạn từ chối trả lời");
+
+        gameScreen.story.nextPosition1 = "tellTruth";
+        gameScreen.story.nextPosition2 = "lie";
+        gameScreen.story.nextPosition3 = "refuseAnswer";
+    }
+
+    public void tellTruth(){
+        gameScreen.gameImageView.setImageResource(R.drawable.postion);
+        gameScreen.gameTextView.setText("Mira nhìn bạn, lo lắng nhưng kiên quyết. Cô đồng ý giúp, giải thích rằng để phá vỡ lời nguyền, bạn phải tìm đủ ba mảnh vỡ ở Rừng Đen - Tenebris, Hồ Bạc - Argentis và Thành Trì Tháp Đen - The Black Tower\n\n Mira đưa bạn một lọ thuốc đặc biệt để hỗ trợ bạn.");
+
+        gameScreen.player.specialPotion = true;
+
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "getOutMiraHome";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void lie(){
+        gameScreen.gameImageView.setImageResource(R.drawable.think);
+        gameScreen.gameTextView.setText("Mira thoáng nghi ngờ nhưng vẫn quyết định giúp bạn. Cô đưa bạn thuốc giảm đau và chỉ dẫn cách vượt qua thử thách đầu tiên, dù ánh mắt vẫn lộ vẻ lo âu. Tuy nhiên, mối quan hệ giữa bạn và Mira sẽ không hoàn toàn gắn kết nếu sự thật chưa được thú nhận.");
+
+        gameScreen.player.playerHp += 10;
+        if(gameScreen.player.playerHp > gameScreen.player.playerMaxHp){
+            gameScreen.player.playerHp = gameScreen.player.playerMaxHp;
+            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp);
+        }
+
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "getOutMiraHome";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void refuseAnswer(){
+        gameScreen.gameImageView.setImageResource(R.drawable.look);
+        gameScreen.gameTextView.setText("Mira nhìn bạn với ánh mắt sợ hãi và lập tức ra lệnh rời đi. Cô tin rằng dấu ấn này sẽ mang thảm họa không chỉ cho bạn mà còn cho toàn thành phố Umbra.\n\n Cuộc hành trình của bạn đã kết thúc!\n\n GAME OVER!!!");
+
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "goTitleScreen";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void getOutMiraHome(){
+        gameScreen.story.nextPositionTwo = "woodenSign";
+        gameScreen.story.nextPosition = "knightDead";
+        gameScreen.gameImageView.setImageResource(R.drawable.knight);
+        gameScreen.gameTextView.setText("Sau khi rời khỏi nhà Mira. Bạn nhận ra có một ánh mắt quen thuộc nhìn chằm chằm bạn. Một vị hiệp sĩ đang cầm kiếm đuổi theo bạn!!!");
+        gameScreen.monster.aMystic();
+        gameScreen.monsterAttackTextView.setText("Attack: 5 - 15");
+
+        gameScreen.button1.setText("Tấn công");
+        gameScreen.button2.setText("Bỏ chạy");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.showAllButton();
+
+        gameScreen.story.nextPosition1 = "attack";
+        gameScreen.story.nextPosition2 = "woodenSign";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void knightDead(){
+        gameScreen.gameImageView.setImageResource(R.drawable.gladius);
+        gameScreen.gameTextView.setText("Bạn lấy thanh kiếm của kẻ địch. Sức mạnh của bạn đã tăng lên!!!");
+
+        gameScreen.player.playerUseSword();
+
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+
+        gameScreen.story.nextPosition1 = "woodenSign";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+    }
+
+    public void woodenSign(){
+        gameScreen.gameImageView.setImageResource(R.drawable.sign);
+        gameScreen.gameTextView.setText("Theo lời của Mira, bạn đã đi tới tấm biển bằng gỗ chỉ lối vào Rừng Đen - Tenebris và Hồ Bạc - Argentis.\n\nBạn sẽ tiến vào đâu trước?");
+
+        gameScreen.story.showAllButton();
+
+        gameScreen.button1.setText("Rừng Đen - Tenebris");
+        gameScreen.button2.setText("Hồ Bạc - Argentis");
+        gameScreen.button3.setText("");
+
+
+        gameScreen.story.nextPosition1 = "tenebris";
+        gameScreen.story.nextPosition2 = "argentis";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
 }
 
