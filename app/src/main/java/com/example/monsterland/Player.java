@@ -8,18 +8,16 @@ import java.util.Random;
 public class Player {
 
     GameScreen gameScreen;
-    public int playerHp = 50;
-    public int playerMaxHp = 50;
+    public int playerHp = 60;
+    public int playerMaxHp = 60;
     public String playerWeapon;
-
-    boolean rustyKnife = false, sword = false;
     boolean leatherArmor = false;
     boolean specialPotion = false;
     Random random = new Random();
 
 
     public int playerAttack, healingPotion = 1, hpHeal, expGain, playerExp, expNeed = 100;
-    public int minAtk, maxAtk;
+    public int minAtk, maxAtk, newMinAtk, newMaxAtk, oldMinAtk, oldMaxAtk;
 
     public Player(GameScreen gameScreen){
         this.gameScreen = gameScreen;
@@ -27,37 +25,42 @@ public class Player {
 
     public void dropHealingPotion(){
         healingPotion += 1;
-        gameScreen.playerHPTextView.setText("HP: "+playerHp);
+        gameScreen.playerHPTextView.setText("HP: "+playerHp+"/"+playerMaxHp);
         gameScreen.healingPotionTextView.setText("x"+healingPotion);
     }
 
 
     public void useHealingButton() {
+        int hp = playerMaxHp - playerHp;
         if (healingPotion > 0) {
             if (playerHp < playerMaxHp) {
-                int randomHP = 40 + random.nextInt(31) ;
+                int randomHP = 50 + random.nextInt(31) ;
                 hpHeal = randomHP * playerMaxHp / 10 / 10;
                 playerHp += hpHeal;
                 healingPotion--;
                 if (playerHp > playerMaxHp) {
                     playerHp = playerMaxHp;
+                    gameScreen.playerHPTextView.setText("HP:     "+playerHp+ "/"+playerMaxHp);
+                    gameScreen.healingPotionTextView.setText("x"+healingPotion);
+                    showToast("Bạn đã hồi được " + hp + " hp!", 3000);
+                }else {
+                    gameScreen.playerHPTextView.setText("HP: " + playerHp + "/" + playerMaxHp);
+                    gameScreen.healingPotionTextView.setText("x" + healingPotion);
+                    showToast("Bạn đã hồi được " + hpHeal + " hp!", 3000);
                 }
-                gameScreen.playerHPTextView.setText("HP: "+playerHp);
-                gameScreen.healingPotionTextView.setText("x"+healingPotion);
-                showToast("Bạn đã hồi được " + hpHeal + " hp!", 3000);
             } else {
-                gameScreen.playerHPTextView.setText("HP: "+playerHp);
+                gameScreen.playerHPTextView.setText("HP: "+playerHp+ "/"+playerMaxHp);
                 gameScreen.healingPotionTextView.setText("x"+healingPotion);
                 showToast("Hp đã đầy, không thể sử dụng!!!", 3000);
             }
         } else {
-            gameScreen.playerHPTextView.setText("HP: "+playerHp);
+            gameScreen.playerHPTextView.setText("HP: "+playerHp+ "/"+playerMaxHp);
             gameScreen.healingPotionTextView.setText("x"+healingPotion);
             showToast("Bạn không có bình máu!!!", 3000);
         }
     }
 
-    private void showToast(String message, int timeShowMessage) {
+    public void showToast(String message, int timeShowMessage) {
         Toast toast = Toast.makeText(gameScreen, message, Toast.LENGTH_LONG);
         toast.show();
         new Handler().postDelayed(new Runnable() {
@@ -80,10 +83,10 @@ public class Player {
             if (playerHp > playerMaxHp) {
                 playerHp = playerMaxHp;
             }
-            playerExp = 0;
+            playerExp = playerExp - expNeed;
             expNeed += 20;
             gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
-            gameScreen.playerHPTextView.setText("Hp: "+playerHp);
+            gameScreen.playerHPTextView.setText("HP: "+playerHp+ "/"+playerMaxHp);
         }else {
             showToast("Bạn nhận được "+expGain+" exp. Bạn cần thêm "+(expNeed - expGain)+" exp để lên cấp!!!",5000);
         }
@@ -92,31 +95,46 @@ public class Player {
         //2 - 3
         minAtk = 2;
         maxAtk = 2;
+        oldMinAtk = 2;
+        oldMaxAtk = 2;
         playerWeapon = "Gậy gỗ";
         gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);
     }
     public void playerUseRustyKnife(){
         //3 - 5
-        minAtk += 1;
-        maxAtk += 1;
-        rustyKnife = true;
+        newMinAtk = 3;
+        newMaxAtk = 3;
+        minAtk += newMinAtk - oldMinAtk;
+        maxAtk += newMaxAtk - oldMaxAtk;
+        oldMinAtk = newMinAtk;
+        oldMaxAtk = newMaxAtk;
         playerWeapon = "Dao rỉ";
+        gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
+        gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);
+    }
+
+    public void playerUseBanditKnife(){
+        //4 - 7
+        newMinAtk = 4;
+        newMaxAtk = 4;
+        minAtk += newMinAtk - oldMinAtk;
+        maxAtk += newMaxAtk - oldMaxAtk;
+        oldMinAtk = newMinAtk;
+        oldMaxAtk = newMaxAtk;
+        playerWeapon = "Dao găm";
         gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);
     }
 
     public void playerUseSword(){
         //6 - 9
-        if(rustyKnife){
-            minAtk += 3;
-            maxAtk += 5;
-        }
-        else {
-            minAtk += 4;
-            maxAtk += 6;
-        }
-        sword = true;
+        newMinAtk = 6;
+        newMaxAtk = 4;
+        minAtk += newMinAtk - oldMinAtk;
+        maxAtk += newMaxAtk - oldMaxAtk;
+        oldMinAtk = newMinAtk;
+        oldMaxAtk = newMaxAtk;
         playerWeapon = "Kiếm sắt";
         gameScreen.playerAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);

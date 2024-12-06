@@ -18,18 +18,36 @@ public class Monster {
     }
 
     public void aMystic(){
-        monsterHP = 10;
+        monsterHP = 120;
         minAtk = 5;
-        maxAtk = 11;
+        maxAtk = 15;
         gameScreen.monsterAttackTextView.setText("Atk: ???");
-        gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
+        gameScreen.monsterHPTextView.setText("Hp: ???");
         gameScreen.player.playerUseArmor();
     }
 
     public void gateKeeper(){
-        monsterHP = 70;
+        monsterHP = 50;
         minAtk = 2;
-        maxAtk = 4;
+        maxAtk = 3;
+        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
+        gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
+        gameScreen.player.playerUseArmor();
+    }
+
+    public void knight(){
+        monsterHP = 75;
+        minAtk = 5;
+        maxAtk = 5;
+        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
+        gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
+        gameScreen.player.playerUseArmor();
+    }
+
+    public void goblinChild(){
+        monsterHP = 20;
+        minAtk = 1;
+        maxAtk = 3;
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
         gameScreen.player.playerUseArmor();

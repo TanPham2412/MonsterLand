@@ -58,6 +58,9 @@ public class Story {
             case "goTitleScreen":
                 gameScreen.goTitleScreen();
                 break;
+            case "banditKnife":
+                gameScreen.storyCastle.banditKnife();
+                break;
             case "intoAlley1":
                 gameScreen.storyCastle.intoAlley1();
                 break;
@@ -99,6 +102,39 @@ public class Story {
                 break;
             case "woodenSign":
                 gameScreen.storyCastle.woodenSign();
+                break;
+            case "tenebris":
+                gameScreen.storyTenebris.tenebris();
+                break;
+            case "woodenSign1":
+                gameScreen.storyTenebris.woodenSign1();
+                break;
+            case "meetGoblin":
+                gameScreen.storyTenebris.meetGoblin();
+                break;
+            case "pleaseMeat":
+                gameScreen.storyTenebris.pleaseMeat();
+                break;
+            case "meatRobbery":
+                gameScreen.storyTenebris.meatRobbery();
+                break;
+            case "leave":
+                gameScreen.storyTenebris.leave();
+                break;
+            case "repay":
+                gameScreen.storyTenebris.repay();
+                break;
+            case "noRepay":
+                gameScreen.storyTenebris.noRepay();
+                break;
+            case "killedGoblin":
+                gameScreen.storyTenebris.killedGoblin();
+                break;
+            case "toRiver":
+                gameScreen.storyTenebris.toRiver();
+                break;
+            case "toVillage":
+                gameScreen.storyTenebris.toVillage();
                 break;
         }
     }

@@ -28,6 +28,8 @@ public class GameScreen extends AppCompatActivity {
     Dialog dialog;
     Story story = new Story(this);
     StoryCastle storyCastle = new StoryCastle(this);
+    StoryArgentis storyArgentis = new StoryArgentis(this);
+    StoryTenebris storyTenebris = new StoryTenebris(this);
     Player player = new Player(this);
     Monster monster = new Monster(this);
     Battle battle = new Battle(this);
