@@ -58,6 +58,9 @@ public class Battle {
         }
         gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
         gameScreen.monsterHPTextView.setText("HP: " + gameScreen.monster.monsterHP);
+        if (gameScreen.player.playerHp < 20 * gameScreen.player.playerMaxHp / 100){
+            gameScreen.player.showToast("Sinh lực của bạn dưới 20%!!!",5000);
+        }
     }
 
     public void run(){

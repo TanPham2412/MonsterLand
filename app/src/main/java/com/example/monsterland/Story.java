@@ -136,6 +136,30 @@ public class Story {
             case "toVillage":
                 gameScreen.storyTenebris.toVillage();
                 break;
+            case "inVillage":
+                gameScreen.storyTenebris.inVillage();
+                break;
+            case "woundedSoldier":
+                gameScreen.storyTenebris.woundedSoldier();
+                break;
+            case "convince":
+                gameScreen.storyTenebris.convince();
+                break;
+            case "findHerb":
+                gameScreen.storyTenebris.findHerb();
+                break;
+            case "attackWolf":
+                gameScreen.storyTenebris.attackWolf();
+                break;
+            case "killedWolf":
+                gameScreen.storyTenebris.killedWolf();
+                break;
+            case "retreat":
+                gameScreen.storyTenebris.retreat();
+                break;
+            case "distract":
+                gameScreen.storyTenebris.distract();
+                break;
         }
     }
 }

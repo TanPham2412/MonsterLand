@@ -40,7 +40,7 @@ public class Player {
                 healingPotion--;
                 if (playerHp > playerMaxHp) {
                     playerHp = playerMaxHp;
-                    gameScreen.playerHPTextView.setText("HP:     "+playerHp+ "/"+playerMaxHp);
+                    gameScreen.playerHPTextView.setText("HP: "+playerHp+ "/"+playerMaxHp);
                     gameScreen.healingPotionTextView.setText("x"+healingPotion);
                     showToast("Bạn đã hồi được " + hp + " hp!", 3000);
                 }else {

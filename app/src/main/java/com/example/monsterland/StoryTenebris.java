@@ -5,7 +5,8 @@ import android.view.View;
 public class StoryTenebris {
     GameScreen gameScreen;
 
-    public boolean tenebris = false, repayGoblin = false, goblinCurse = false;
+    public boolean tenebris = false, repayGoblin = false, goblinCurse = false, wolfTrap = false;
+    int bonedart = 0;
     public StoryTenebris(GameScreen gameScreen){
         this.gameScreen = gameScreen;
     }
@@ -24,11 +25,12 @@ public class StoryTenebris {
             gameScreen.button2.setText("Quay lại");
             gameScreen.button3.setText("");
 
-            gameScreen.story.nextPosition1 = "meetGoblin";
             if(gameScreen.storyCastle.knightDead){
+                gameScreen.story.nextPosition1 = "toVillage";
                 gameScreen.story.nextPosition2 = "woodenSign";
             }
             else {
+                gameScreen.story.nextPosition1 = "meetGoblin";
                 gameScreen.story.nextPosition2 = "woodenSign1";
             }
             gameScreen.story.nextPosition3 = "";
@@ -185,7 +187,7 @@ public class StoryTenebris {
             else {
                 gameScreen.player.showToast("Bạn đã hồi được " + 30 + " hp!", 3000);
             }
-            gameScreen.playerHPTextView.setText("HP: " + gameScreen.player.playerHp);
+            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
         }
 
         gameScreen.button1.setText(">");
@@ -244,11 +246,159 @@ public class StoryTenebris {
         gameScreen.button2.setText("");
         gameScreen.button3.setText("");
 
-        gameScreen.story.nextPosition1 = "";
+        gameScreen.story.nextPosition1 = "inVillage";
         gameScreen.story.nextPosition2 = "";
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void inVillage(){
+        gameScreen.gameImageView.setImageResource(R.drawable.minions);
+        gameScreen.gameTextView.setText("Khi bước vào làng, bạn nhanh chóng nhận ra một bầu không khí kỳ lạ bao trùm nơi đây. Người dân nhìn bạn bằng ánh mắt lo lắng, khuôn mặt họ lộ rõ vẻ hoảng sợ và tuyệt vọng. Không giống với những gì Mira đã kể, ngôi làng này dường như đang chịu đựng một nỗi ám ảnh nào đó, khiến bạn không khỏi cảm thấy bất an.");
+        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+
+        gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
+
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "woundedSoldier";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void woundedSoldier(){
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+        gameScreen.gameImageView.setImageResource(R.drawable.kneebandage);
+        gameScreen.gameTextView.setText("Sau khi dò hỏi thông tin từ những người dân, bạn phát hiện trưởng làng đã bị lũ orc bắt đi. Hy vọng duy nhất là một chiến binh trong làng, người duy nhất biết vị trí của trưởng làng bị bắt. Tuy nhiên, anh ta đang bị thương nặng, nằm trên giường trong tình trạng nguy kịch. Người dân nói anh ấy cần một loại thảo dược quý hiếm để chữa trị, và chỉ có bạn mới có thể tìm được nó.");
+        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+        gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
+
+        gameScreen.story.showAllButton();
+
+        gameScreen.button1.setText("Đi tìm thảo dược");
+        gameScreen.button2.setText("Xông vào sào huyệt Orc");
+        gameScreen.button3.setText("Thuyết phục dân làng giúp đỡ");
+
+        gameScreen.story.nextPosition1 = "findHerb";
+        gameScreen.story.nextPosition2 = "orcBase";
+        gameScreen.story.nextPosition3 = "convince";
+    }
+
+    public void convince(){
+        gameScreen.gameImageView.setImageResource(R.drawable.wolftrap);
+        gameScreen.gameTextView.setText("Bạn quyết định thuyết phục dân làng giúp đỡ, giải thích rằng cứu sống người chiến binh là hy vọng duy nhất để giải cứu trưởng làng. Sau một hồi bàn bạc, dân làng đồng ý hỗ trợ. Họ đưa cho bạn một cái bẫy thú, được thiết kế chắc chắn, có thể giúp bạn đối phó với những sinh vật nguy hiểm trong rừng.");
+        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+
+        gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
+
+        wolfTrap = true;
+
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "findHerb";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void findHerb(){
+        gameScreen.gameImageView.setImageResource(R.drawable.wolfhead);
+        gameScreen.story.showAllButton();
+        if(!wolfTrap){
+            gameScreen.gameTextView.setText("Bạn quyết định giúp đỡ người chiến binh và bắt đầu hành trình tìm kiếm thảo dược trong rừng sâu. Đúng như dự đoán, khu rừng đầy rẫy những nguy hiểm rình rập, và sau nhiều giờ tìm kiếm, bạn phát hiện ra loại thảo dược quý hiếm đang mọc trong một khu vực hẻo lánh. Nhưng không may, nó đang được một con sói lớn canh giữ, với đôi mắt sắc lạnh và bộ lông sẫm màu phản chiếu ánh sáng. Con sói gầm gừ, sẵn sàng lao tới bất cứ lúc nào.");
+            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+
+            gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
+
+            gameScreen.button1.setText("Tấn công con sói.");
+            gameScreen.button2.setText("Rút lui tìm phương án khác.") ;
+            gameScreen.button3.setText("");
+
+            gameScreen.story.nextPosition1 = "attackWolf";
+            gameScreen.story.nextPosition2 = "retreat";
+            gameScreen.story.nextPosition3 = "";
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+        }
+        else {
+            gameScreen.gameTextView.setText("Bạn bắt đầu hành trình tìm kiếm thảo dược trong rừng sâu. Đúng như dự đoán, khu rừng đầy rẫy những nguy hiểm rình rập, và sau nhiều giờ tìm kiếm, bạn phát hiện ra loại thảo dược quý hiếm đang mọc trong một khu vực hẻo lánh. Nhưng không may, nó đang được một con sói lớn canh giữ, với đôi mắt sắc lạnh và bộ lông sẫm màu phản chiếu ánh sáng. Con sói gầm gừ, sẵn sàng lao tới bất cứ lúc nào.");
+            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+            gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
+
+            gameScreen.button1.setText("Tấn công con sói.");
+            gameScreen.button2.setText("Tìm cách đánh lạc hướng.") ;
+            gameScreen.button3.setText("");
+
+            gameScreen.story.nextPosition1 = "attackWolf";
+            gameScreen.story.nextPosition2 = "distract";
+            gameScreen.story.nextPosition3 = "";
+
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+        }
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+    }
+
+    public void attackWolf(){
+        gameScreen.story.nextPosition = "killedWolf";
+        gameScreen.monster.wolf();
+        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+        gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
+        gameScreen.gameTextView.setText("Quyết tâm đối mặt với con sói, bạn lao vào trong một bước đi đầy dũng cảm. Con sói phản ứng nhanh, nhưng nhờ vào kỹ năng và sự quyết đoán của mình, bạn đã thành công gây thương tích cho nó.");
+        gameScreen.player.showToast("Bạn đã thành công trong việc tấn công con sói, khiến nó mất đi 20 HP.",2000);
+        gameScreen.button1.setText("Tấn công");
+        gameScreen.button2.setText("") ;
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "attack";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void killedWolf(){
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+        distract();
+        gameScreen.gameTextView.setText("Bạn đã thành công tiêu diệt con sói. Với cái xác của nó, bạn nhanh chóng chế tạo những chiếc phi tiêu bằng xương sắc bén. Đồng thời, bạn thu thập các thảo dược quý hiếm để chữa trị cho người chiến binh, hy vọng rằng hành động này sẽ giúp anh ta hồi phục và cung cấp thông tin quan trọng về vị trí của bọn orc.");
+        bonedart = 5;
+    }
+
+
+    public void retreat(){
+        woundedSoldier();
+        gameScreen.gameTextView.setText("Sau khi quay lại làng và tìm kiếm phương án khác, bạn đối mặt với một lựa chọn quan trọng: Liệu bạn sẽ kêu gọi sự giúp đỡ từ dân làng hay trực tiếp đối đầu với nguy hiểm, tìm đến hang ổ của bọn orc? Hay quay lại đối mặt với con sói và chiến đấu?");
+    }
+
+    public void distract(){
+        gameScreen.gameImageView.setImageResource(R.drawable.herbsbundle);
+        gameScreen.gameTextView.setText("Với sự thông minh của mình, bạn quyết định đánh lạc hướng con sói. Sử dụng bẫy mà dân làng đưa cho, bạn khéo léo dẫn dụ con sói vào vị trí bẫy. Chỉ trong giây lát, con sói bị mắc kẹt, không kịp phản ứng. Bạn nhanh chóng thu thập thảo dược quý hiếm mà không hề bị thương, cảm giác thành công dâng trào khi bạn hoàn thành nhiệm vụ mà không gặp nguy hiểm.");
+        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+
+        gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
+
+        gameScreen.button1.setText("Quay lại làng");
+        gameScreen.button2.setText("") ;
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
     }
 }
