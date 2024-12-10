@@ -15,6 +15,7 @@ public class Monster {
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
         gameScreen.player.playerUseArmor();
+        gameScreen.story.race = "primate";
     }
 
     public void aMystic(){
@@ -24,6 +25,7 @@ public class Monster {
         gameScreen.monsterAttackTextView.setText("Atk: ???");
         gameScreen.monsterHPTextView.setText("Hp: ???");
         gameScreen.player.playerUseArmor();
+        gameScreen.story.race = "primate";
     }
 
     public void gateKeeper(){
@@ -33,6 +35,7 @@ public class Monster {
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
         gameScreen.player.playerUseArmor();
+        gameScreen.story.race = "primate";
     }
 
     public void knight(){
@@ -42,6 +45,7 @@ public class Monster {
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
         gameScreen.player.playerUseArmor();
+        gameScreen.story.race = "primate";
     }
 
     public void goblinChild(){
@@ -51,6 +55,7 @@ public class Monster {
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
         gameScreen.player.playerUseArmor();
+        gameScreen.story.race = "primate";
     }
 
     public void wolf(){
@@ -60,5 +65,6 @@ public class Monster {
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
         gameScreen.player.playerUseArmor();
+        gameScreen.story.race = "animal";
     }
 }

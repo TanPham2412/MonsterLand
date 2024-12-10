@@ -7,6 +7,8 @@ public class Story {
     GameScreen gameScreen;
     String nextPosition1, nextPosition2, nextPosition3, nextPosition, nextPositionTwo;
 
+    String race;
+
     public Story(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
     }
