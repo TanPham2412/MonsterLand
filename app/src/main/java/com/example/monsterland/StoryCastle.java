@@ -1,3 +1,4 @@
+
 package com.example.monsterland;
 
 import android.view.View;
@@ -609,4 +610,3 @@ public class StoryCastle {
         gameScreen.monsterHPTextView.setText("");
     }
 }
-
