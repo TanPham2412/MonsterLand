@@ -5,6 +5,7 @@ import android.view.View;
 public class Story {
 
     GameScreen gameScreen;
+    String savePosition;
     String nextPosition1, nextPosition2, nextPosition3, nextPosition, nextPositionTwo;
 
     String race;
@@ -21,6 +22,9 @@ public class Story {
 
     public void selectPosition(String position) {
         switch (position) {
+            case "opening1":
+                gameScreen.storyCastle.opening1();
+                break;
             case "opening2":
                 gameScreen.storyCastle.opening2();
                 break;

@@ -3,9 +3,12 @@ package com.example.monsterland;
 
 import android.view.View;
 
+import java.util.Objects;
+
 public class StoryCastle {
     GameScreen gameScreen;
     boolean knightDead = false;
+    String image;
     public StoryCastle(GameScreen gameScreen){
         this.gameScreen = gameScreen;
     }
@@ -26,6 +29,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "opening1";
     }
 
     public void opening2(){
@@ -42,6 +46,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition1 = "meetCat";
         gameScreen.story.nextPosition2 = "";
         gameScreen.story.nextPosition3 = "";
+        gameScreen.story.savePosition = "opening2";
     }
 
     public void meetCat(){
@@ -59,6 +64,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "meetCat";
     }
 
     public void trashCan(){
@@ -76,6 +82,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "trashCan";
     }
 
     public void useKnife(){
@@ -91,6 +98,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "useKnife";
     }
 
     public void notUseKnife(){
@@ -106,6 +114,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "notUseKnife";
     }
 
     public void alley(){
@@ -123,6 +132,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "alley";
     }
 
     public void intoAlley(){
@@ -143,6 +153,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "intoAlley";
     }
     public void sneakAttack(){
         gameScreen.story.nextPosition = "banditKnife";
@@ -160,9 +171,17 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "sneakAttack";
     }
 
     public void attack(){
+        if (Objects.equals(gameScreen.story.nextPosition, "banditKnife")){
+            gameScreen.gameImageView.setImageResource(R.drawable.bandit);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "outsideCastle")){
+            gameScreen.gameImageView.setImageResource(R.drawable.hood);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "leatherArmor")){
+            gameScreen.gameImageView.setImageResource(R.drawable.gatekeeper);
+        }
         gameScreen.battle.attack();
         if(gameScreen.player.playerHp <=0){
 
@@ -221,7 +240,9 @@ public class StoryCastle {
             gameScreen.story.nextPosition3 = "";
 
             gameScreen.button3.setVisibility(View.INVISIBLE);
+
         }
+        gameScreen.story.savePosition = "attack";
     }
 
     public void run(){
@@ -259,6 +280,7 @@ public class StoryCastle {
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.savePosition = "run";
     }
 
     public void runBeforeAttack(){
@@ -281,6 +303,7 @@ public class StoryCastle {
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else {
+            gameScreen.gameImageView.setImageResource(R.drawable.bandit);
             gameScreen.gameTextView.setText("Bạn đã bị phát hiện! Tiếng bước chân vang lên từ phía sau, kẻ địch đang tiến lại gần, ánh mắt đầy thù địch. Không còn lựa chọn nào khác, bạn buộc phải chiến đấu để bảo vệ chính mình!");
 
             gameScreen.button1.setText("Tấn công");
@@ -294,6 +317,7 @@ public class StoryCastle {
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.savePosition = "runBeforeAttack";
     }
 
     public void banditKnife(){
@@ -312,6 +336,7 @@ public class StoryCastle {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "banditKnife";
     }
 
     public void dead(){
@@ -327,6 +352,7 @@ public class StoryCastle {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "dead";
     }
 
     public void intoAlley1(){
@@ -346,6 +372,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "intoAlley1";
     }
 
     public void outsideCastle(){
@@ -364,6 +391,7 @@ public class StoryCastle {
 
         gameScreen.monsterHPTextView.setText("");
         gameScreen.monsterAttackTextView.setText("");
+        gameScreen.story.savePosition = "outsideCastle";
     }
     public void keepGoing(){
         gameScreen.story.nextPositionTwo = "run";
@@ -380,6 +408,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition1 = "checkAtGate";
         gameScreen.story.nextPosition2 = "attack";
         gameScreen.story.nextPosition3 = "alley";
+        gameScreen.story.savePosition = "keepGoing";
     }
 
     public void checkAtGate(){
@@ -416,6 +445,7 @@ public class StoryCastle {
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.savePosition = "checkAtGate";
     }
 
     public void leatherArmor(){
@@ -435,6 +465,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "leatherArmor";
     }
 
     public void useLeatherArmor(){
@@ -459,6 +490,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "useLeaderArmor";
     }
     public void notUseLeatherArmor(){
         gameScreen.gameImageView.setImageResource(R.drawable.go);
@@ -473,6 +505,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "outsideCastle";
     }
 
     public void meetMira(){
@@ -488,6 +521,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition1 = "tellTruth";
         gameScreen.story.nextPosition2 = "lie";
         gameScreen.story.nextPosition3 = "refuseAnswer";
+        gameScreen.story.savePosition = "meetMira";
     }
 
     public void tellTruth(){
@@ -506,6 +540,7 @@ public class StoryCastle {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "tellTruth";
     }
 
     public void lie(){
@@ -528,6 +563,7 @@ public class StoryCastle {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "lie";
     }
 
     public void refuseAnswer(){
@@ -544,6 +580,7 @@ public class StoryCastle {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "refuseAnswer";
     }
 
     public void getOutMiraHome(){
@@ -564,6 +601,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "getOutMiraHome";
     }
 
     public void knightDead(){
@@ -587,6 +625,7 @@ public class StoryCastle {
         gameScreen.monsterAttackTextView.setText("");
         gameScreen.monsterHPTextView.setText("");
         knightDead = true;
+        gameScreen.story.savePosition = "knightDead";
     }
 
     public void woodenSign(){
@@ -608,5 +647,6 @@ public class StoryCastle {
 
         gameScreen.monsterAttackTextView.setText("");
         gameScreen.monsterHPTextView.setText("");
+        gameScreen.story.savePosition = "woodenSign";
     }
 }

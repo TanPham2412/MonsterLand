@@ -46,7 +46,7 @@ public class StoryTenebris {
 
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
-
+        gameScreen.story.savePosition = "tenebris";
     }
 
     public void woodenSign1(){
@@ -66,6 +66,7 @@ public class StoryTenebris {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "woodenSign1";
     }
 
     public void meetGoblin(){
@@ -84,7 +85,7 @@ public class StoryTenebris {
         gameScreen.story.nextPosition1 = "pleaseMeat";
         gameScreen.story.nextPosition2 = "meatRobbery";
         gameScreen.story.nextPosition3 = "leave";
-
+        gameScreen.story.savePosition = "meetGoblin";
     }
 
     public void pleaseMeat(){
@@ -126,6 +127,7 @@ public class StoryTenebris {
 
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.savePosition = "pleaseMeat";
     }
 
     public void meatRobbery(){
@@ -147,7 +149,7 @@ public class StoryTenebris {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
-
+        gameScreen.story.savePosition = "meatRobbery";
     }
     public void leave(){
         gameScreen.gameImageView.setImageResource(R.drawable.goblin);
@@ -166,6 +168,7 @@ public class StoryTenebris {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "leave";
     }
 
     public void repay(){
@@ -200,12 +203,14 @@ public class StoryTenebris {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "repay";
     }
 
     public void noRepay(){
         repay();
         repayGoblin = false;
         gameScreen.gameTextView.setText("Sau khi goblin cho bạn miếng thịt, bạn nhận lấy và ăn một cách cẩn thận, cảm nhận sức lực dần hồi phục. Goblin chỉ lặng lẽ quan sát, không nói lời nào. Bạn cảm ơn nó, không hứa hẹn gì, chỉ đơn giản là biết rằng sự giúp đỡ này đã đủ trong lúc cần thiết. Sau khi ăn xong, bạn đứng dậy, cảm thấy bớt mệt mỏi hơn, rồi tiếp tục hành trình của mình.");
+        gameScreen.story.savePosition = "noRepay";
     }
 
     public void killedGoblin(){
@@ -214,6 +219,7 @@ public class StoryTenebris {
         leave();
         gameScreen.gameTextView.setText("Sau khi tiêu diệt goblin con, hơi thở cuối cùng của nó ám lấy bạn, cảm giác lạnh lẽo lan tỏa khắp cơ thể. Một lời nguyền mơ hồ như đang bám riết lấy bạn, khiến bạn không thể nào thoát khỏi. Bạn biết rằng những kẻ đồng loại của nó sẽ không để yên, và sự trả thù đang đến gần. Cảm giác đó như một bóng đen bám theo, đe dọa cuộc hành trình phía trước của bạn.");
         goblinCurse = true;
+        gameScreen.story.savePosition = "killedGoblin";
     }
 
     public void toRiver(){
@@ -233,6 +239,7 @@ public class StoryTenebris {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "toRiver";
     }
 
     public void toVillage(){
@@ -252,6 +259,7 @@ public class StoryTenebris {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "toVillage";
     }
 
     public void inVillage(){
@@ -271,6 +279,7 @@ public class StoryTenebris {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "inVillage";
     }
 
     public void woundedSoldier(){
@@ -290,6 +299,7 @@ public class StoryTenebris {
         gameScreen.story.nextPosition1 = "findHerb";
         gameScreen.story.nextPosition2 = "orcBase";
         gameScreen.story.nextPosition3 = "convince";
+        gameScreen.story.savePosition = "woundedSoldier";
     }
 
     public void convince(){
@@ -311,6 +321,7 @@ public class StoryTenebris {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "convince";
     }
 
     public void findHerb(){
@@ -348,6 +359,7 @@ public class StoryTenebris {
         }
         gameScreen.monsterAttackTextView.setText("");
         gameScreen.monsterHPTextView.setText("");
+        gameScreen.story.savePosition = "findHerb";
     }
 
     public void attackWolf(){
@@ -367,6 +379,7 @@ public class StoryTenebris {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "attackWolf";
     }
 
     public void killedWolf(){
@@ -375,12 +388,14 @@ public class StoryTenebris {
         distract();
         gameScreen.gameTextView.setText("Bạn đã thành công tiêu diệt con sói. Với cái xác của nó, bạn nhanh chóng chế tạo những chiếc phi tiêu bằng xương sắc bén. Đồng thời, bạn thu thập các thảo dược quý hiếm để chữa trị cho người chiến binh, hy vọng rằng hành động này sẽ giúp anh ta hồi phục và cung cấp thông tin quan trọng về vị trí của bọn orc.");
         bonedart = 5;
+        gameScreen.story.savePosition = "killedWolf";
     }
 
 
     public void retreat(){
         woundedSoldier();
         gameScreen.gameTextView.setText("Sau khi quay lại làng và tìm kiếm phương án khác, bạn đối mặt với một lựa chọn quan trọng: Liệu bạn sẽ kêu gọi sự giúp đỡ từ dân làng hay trực tiếp đối đầu với nguy hiểm, tìm đến hang ổ của bọn orc? Hay quay lại đối mặt với con sói và chiến đấu?");
+        gameScreen.story.savePosition = "retreat";
     }
 
     public void distract(){
@@ -400,6 +415,7 @@ public class StoryTenebris {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "distract";
     }
 
     public void backToVillage(){
@@ -440,6 +456,7 @@ public class StoryTenebris {
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.savePosition = "backToVillage";
     }
 
     public void elderGoblin(){
@@ -463,10 +480,12 @@ public class StoryTenebris {
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.savePosition = "elderGoblin";
     }
 
     public void boneDart(){
         gameScreen.battle.random();
+        gameScreen.story.savePosition = "boneDart";
     }
 
     public void attack1(){
@@ -528,5 +547,6 @@ public class StoryTenebris {
 
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.savePosition = "attack1";
     }
 }
