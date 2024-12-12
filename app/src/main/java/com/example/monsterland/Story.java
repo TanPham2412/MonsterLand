@@ -163,6 +163,24 @@ public class Story {
             case "retreat":
                 gameScreen.storyTenebris.retreat();
                 break;
+            case "backToVillage":
+                gameScreen.storyTenebris.backToVillage();
+                break;
+            case "noHelpGoblin":
+                gameScreen.storyTenebris.noHelpGoblin();
+                break;
+            case "kingGoblin":
+                gameScreen.storyTenebris.kingGoblin();
+                break;
+            case "boneDart":
+                gameScreen.storyTenebris.boneDart();
+                break;
+            case "attack1":
+                gameScreen.storyTenebris.attack1();
+                break;
+            case "helpGoblin":
+                gameScreen.storyTenebris.helpGoblin();
+                break;
             case "distract":
                 gameScreen.storyTenebris.distract();
                 break;

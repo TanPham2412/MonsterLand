@@ -12,6 +12,7 @@ public class Player {
     public int playerMaxHp = 60;
     public String playerWeapon;
     boolean leatherArmor = false;
+    boolean smallShield = false;
     boolean specialPotion = false;
     Random random = new Random();
 
@@ -74,7 +75,7 @@ public class Player {
         expGain = 60 + random.nextInt(41);
         playerExp += expGain;
         if (playerExp >= expNeed){
-            showToast("Bạn nhận được "+expGain+". Bạn đã lên cấp!! Mọi chỉ số của bạn được tăng lên!!",5000);
+            showToast("Bạn nhận được "+expGain+" exp. Bạn đã lên cấp!! Mọi chỉ số của bạn được tăng lên!!",5000);
             minAtk += 1;
             playerMaxHp += 10;
             int randomHP = 20 + random.nextInt(21) ;

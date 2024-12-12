@@ -121,6 +121,7 @@ public class GameScreen extends AppCompatActivity {
         editor.putInt("expNeed", player.expNeed);
         editor.putBoolean("leatherArmor", player.leatherArmor);
         editor.putBoolean("specialPotion", player.specialPotion);
+        editor.putBoolean("smallShield", player.smallShield);
 
         editor.putBoolean("knightDead", storyCastle.knightDead);
 
@@ -128,7 +129,7 @@ public class GameScreen extends AppCompatActivity {
         editor.putBoolean("repayGoblin", storyTenebris.repayGoblin);
         editor.putBoolean("goblinCurse", storyTenebris.goblinCurse);
         editor.putBoolean("wolfTrap", storyTenebris.wolfTrap);
-        editor.putInt("bonedart", storyTenebris.bonedart);
+        editor.putInt("boneDart", storyTenebris.boneDart);
 
         editor.putString("race", story.race);
         editor.putInt("monsterHP", monster.monsterHP);
@@ -159,6 +160,7 @@ public class GameScreen extends AppCompatActivity {
 
             player.leatherArmor = sharedPreferences.getBoolean("leatherArmor", player.leatherArmor);
             player.specialPotion = sharedPreferences.getBoolean("specialPotion", player.specialPotion);
+            player.specialPotion = sharedPreferences.getBoolean("smallShield", player.smallShield);
             story.savePosition = savedPosition;
 
             playerHPTextView.setText("HP: " + player.playerHp + "/" + player.playerMaxHp);
@@ -172,7 +174,7 @@ public class GameScreen extends AppCompatActivity {
             storyTenebris.goblinCurse = sharedPreferences.getBoolean("goblinCurse", storyTenebris.goblinCurse);
             storyTenebris.wolfTrap = sharedPreferences.getBoolean("wolfTrap", storyTenebris.wolfTrap);
             storyTenebris.tenebris = sharedPreferences.getBoolean("tenebris", storyTenebris.tenebris);
-            storyTenebris.bonedart = sharedPreferences.getInt("boneDart", storyTenebris.bonedart);
+            storyTenebris.boneDart = sharedPreferences.getInt("boneDart", storyTenebris.boneDart);
 
             story.race = sharedPreferences.getString("race", story.race);
             monster.monsterHP = sharedPreferences.getInt("monsterHP", monster.monsterHP);

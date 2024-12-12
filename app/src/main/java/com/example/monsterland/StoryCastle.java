@@ -181,7 +181,12 @@ public class StoryCastle {
             gameScreen.gameImageView.setImageResource(R.drawable.hood);
         } else if(Objects.equals(gameScreen.story.nextPosition, "leatherArmor")){
             gameScreen.gameImageView.setImageResource(R.drawable.gatekeeper);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "deadKnight")){
+            gameScreen.gameImageView.setImageResource(R.drawable.knight);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "killedGoblin")){
+            gameScreen.gameImageView.setImageResource(R.drawable.goblin);
         }
+
         gameScreen.battle.attack();
         if(gameScreen.player.playerHp <=0){
 
@@ -197,8 +202,6 @@ public class StoryCastle {
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else if (gameScreen.monster.monsterHP <=0) {
-            gameScreen.gameTextView.setText("Bạn đã thành công đánh bại kẻ địch! Hắn ngã xuống, và chiến thắng là của bạn!!!");
-
             gameScreen.button1.setText(">");
             gameScreen.button2.setText("");
             gameScreen.button3.setText("");
@@ -210,10 +213,10 @@ public class StoryCastle {
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
             gameScreen.player.playerExpGain();
-            if(gameScreen.battle.percent <=6) {
-                gameScreen.player.dropHealingPotion();
-                gameScreen.gameTextView.setText("Bạn đã thành công đánh bại kẻ địch! Hắn ngã xuống, và chiến thắng là của bạn.\n\nBạn nhận được một bình máu, giúp hồi phục sức khỏe và chuẩn bị cho những thử thách tiếp theo.");
-            }
+
+            gameScreen.player.dropHealingPotion();
+            gameScreen.gameTextView.setText("Bạn đã thành công đánh bại kẻ địch! Hắn ngã xuống, và chiến thắng là của bạn.\n\nBạn nhận được một bình máu, giúp hồi phục sức khỏe và chuẩn bị cho những thử thách tiếp theo.");
+
             gameScreen.monsterAttackTextView.setText("");
             gameScreen.monsterHPTextView.setText("");
         }

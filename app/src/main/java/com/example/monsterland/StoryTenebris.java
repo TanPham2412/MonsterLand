@@ -2,11 +2,13 @@ package com.example.monsterland;
 
 import android.view.View;
 
+import java.util.Objects;
+
 public class StoryTenebris {
     GameScreen gameScreen;
 
     public boolean tenebris = false, repayGoblin = false, goblinCurse = false, wolfTrap = false;
-    int bonedart = 0;
+    int boneDart = 0;
     public StoryTenebris(GameScreen gameScreen){
         this.gameScreen = gameScreen;
     }
@@ -20,32 +22,24 @@ public class StoryTenebris {
 
         gameScreen.story.showAllButton();
 
-        if(!gameScreen.storyArgentis.argentis){
-            gameScreen.button1.setText("Tiếp tục đi");
-            gameScreen.button2.setText("Quay lại");
-            gameScreen.button3.setText("");
+        gameScreen.button1.setText("Tiếp tục đi");
+        gameScreen.button2.setText("Quay lại");
+        gameScreen.button3.setText("");
 
-            if(gameScreen.storyCastle.knightDead){
-                gameScreen.story.nextPosition1 = "toVillage";
+        gameScreen.story.nextPosition1 = "meetGoblin";
+        if(!gameScreen.storyArgentis.argentis){
+            if(!gameScreen.storyCastle.knightDead){
+                gameScreen.story.nextPosition2 = "woodenSign1";
+                gameScreen.button3.setVisibility(View.INVISIBLE);
+            } else {
                 gameScreen.story.nextPosition2 = "woodenSign";
             }
-            else {
-                gameScreen.story.nextPosition1 = "meetGoblin";
-                gameScreen.story.nextPosition2 = "woodenSign1";
-            }
-            gameScreen.story.nextPosition3 = "";
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         } else {
-            gameScreen.button1.setText("Tiếp tục đi");
-            gameScreen.button2.setText("Quay lại");
-            gameScreen.button3.setText("");
-
-            gameScreen.story.nextPosition1 = "toVillage";
             gameScreen.story.nextPosition2 = "woodenSign";
-            gameScreen.story.nextPosition3 = "";
-
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "tenebris";
     }
 
@@ -387,7 +381,7 @@ public class StoryTenebris {
         gameScreen.monsterHPTextView.setText("");
         distract();
         gameScreen.gameTextView.setText("Bạn đã thành công tiêu diệt con sói. Với cái xác của nó, bạn nhanh chóng chế tạo những chiếc phi tiêu bằng xương sắc bén. Đồng thời, bạn thu thập các thảo dược quý hiếm để chữa trị cho người chiến binh, hy vọng rằng hành động này sẽ giúp anh ta hồi phục và cung cấp thông tin quan trọng về vị trí của bọn orc.");
-        bonedart = 5;
+        boneDart = 5;
         gameScreen.story.savePosition = "killedWolf";
     }
 
@@ -421,7 +415,7 @@ public class StoryTenebris {
     public void backToVillage(){
         if (!goblinCurse){
             gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-            gameScreen.gameTextView.setText("Trên đường trở về làng, bạn bất ngờ gặp lại đứa trẻ goblin mà bạn từng chạm trán. Đứa bé tiến lại gần, ánh mắt vừa lo lắng vừa hy vọng. Nó nói rằng con gái của tộc trưởng goblin đang bị thương nặng, và thảo dược mà bạn đang mang chính là thứ họ cần để cứu mạng cô ấy. Lời nói của đứa trẻ khiến bạn phải suy nghĩ: liệu bạn sẽ giúp họ hay giữ thảo dược cho chiến binh của làng?");
+            gameScreen.gameTextView.setText("Trên đường trở về làng, bạn bất ngờ gặp đứa trẻ goblin đi cùng với một chiến binh goblin. Đứa bé tiến lại gần, ánh mắt vừa lo lắng vừa hy vọng. Nó nói rằng con gái của tộc trưởng goblin đang bị thương nặng, và thảo dược mà bạn đang mang chính là thứ họ cần để cứu mạng cô ấy. Lời nói của đứa trẻ khiến bạn phải suy nghĩ: liệu bạn sẽ giúp họ hay giữ thảo dược cho chiến binh của làng?");
             gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
 
             gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
@@ -439,8 +433,8 @@ public class StoryTenebris {
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else{
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-            gameScreen.gameTextView.setText("Trên đường trở về làng, bạn bất ngờ đối mặt với một goblin trưởng thành, toàn thân trang bị vũ khí sắc bén và ánh mắt tràn đầy sát khí. Bạn nhận ra rằng đây không phải một cuộc gặp gỡ ngẫu nhiên. Lời nguyền từ việc giết hại đứa trẻ goblin trước đó vẫn còn ám lên bạn, và giờ đây dường như chính nó đã dẫn lối cho goblin này tìm đến bạn.");
+            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
+            gameScreen.gameTextView.setText("Trên đường trở về làng, bạn bất ngờ đối mặt với một goblin, toàn thân trang bị vũ khí sắc bén và ánh mắt tràn đầy sát khí. Đây chắc hẳn là tù trưởng goblin mà dân làng từng nói với bạn. Bạn nhận ra rằng đây không phải một cuộc gặp gỡ ngẫu nhiên. Lời nguyền từ việc giết hại đứa trẻ goblin trước đó vẫn còn ám lên bạn, và giờ đây dường như chính nó đã dẫn lối cho goblin này tìm đến bạn.");
             gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
 
             gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
@@ -449,7 +443,7 @@ public class StoryTenebris {
             gameScreen.button2.setText("") ;
             gameScreen.button3.setText("");
 
-            gameScreen.story.nextPosition1 = "elderGoblin";
+            gameScreen.story.nextPosition1 = "kingGoblin";
             gameScreen.story.nextPosition2 = "";
             gameScreen.story.nextPosition3 = "";
 
@@ -459,9 +453,75 @@ public class StoryTenebris {
         gameScreen.story.savePosition = "backToVillage";
     }
 
-    public void elderGoblin(){
-        if (bonedart > 0){
+    public void helpGoblin(){
+        gameScreen.gameImageView.setImageResource(R.drawable.herbsbundle);
+        if(!repayGoblin) {
+            gameScreen.gameTextView.setText("Bạn đưa toàn bộ thảo dược cho goblin, ánh mắt nó sáng lên đầy cảm kích. Nó nhận lấy bằng đôi tay run run, miệng lẩm bẩm cảm ơn bằng thứ tiếng khó hiểu.\n" + "\n" + "Để đáp lại, goblin trao cho bạn một chiếc khiên nhỏ, khẽ nói: \"Thứ này sẽ bảo vệ bạn.\"\n" + "\n" + "Nhìn món quà trên tay, bạn nhận ra rằng lòng tốt đôi khi là vũ khí mạnh nhất trong thế giới đầy hiểm nguy này.");
+            gameScreen.playerHPTextView.setText("HP: " + gameScreen.player.playerHp + "/" + gameScreen.player.playerMaxHp);
+
+            gameScreen.story.showAllButton();
+
+            gameScreen.button1.setText(">");
+            gameScreen.button2.setText("");
+            gameScreen.button3.setText("");
+
+            gameScreen.story.nextPosition1 = "";
+            gameScreen.story.nextPosition2 = "";
+            gameScreen.story.nextPosition3 = "";
+
+            gameScreen.button2.setVisibility(View.INVISIBLE);
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+        }else {
+            gameScreen.gameTextView.setText("Bạn quyết định chia sẻ một nửa thảo dược của mình với goblin. Đôi mắt nó sáng lên, đầy bất ngờ và cảm kích. Goblin cúi đầu, đưa tay nhận lấy phần thảo dược một cách kính cẩn.\n\n" + "Để đáp lại, goblin trao cho bạn một chiếc khiên nhỏ. 'Cảm ơn, bạn thật sự tốt bụng,' goblin lí nhí nói bằng thứ tiếng khàn khàn của nó.");            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+
+            gameScreen.player.smallShield = true;
+
+            gameScreen.button1.setText(">");
+            gameScreen.button2.setText("") ;
+            gameScreen.button3.setText("");
+
+            gameScreen.story.nextPosition1 = "";
+            gameScreen.story.nextPosition2 = "";
+            gameScreen.story.nextPosition3 = "";
+
+            gameScreen.button2.setVisibility(View.INVISIBLE);
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+        }
+        gameScreen.story.savePosition = "helpGoblin";
+    }
+
+    public void noHelpGoblin(){
+        if(repayGoblin){
+            gameScreen.gameImageView.setImageResource(R.drawable.herbsbundle);
+            gameScreen.gameTextView.setText("Bạn quyết định không chia sẻ thảo dược cho goblin. Với giọng điềm tĩnh, bạn giải thích rằng thảo dược này cần thiết để cứu chữa cho một người quan trọng.\n\n" + "Goblin lắng nghe và gật đầu chậm rãi, đôi mắt nó ánh lên sự cảm thông. 'Tôi hiểu,' nó nói khẽ, rồi từ từ rời đi mà không oán trách.");
+            gameScreen.playerHPTextView.setText("HP: " + gameScreen.player.playerHp + "/" + gameScreen.player.playerMaxHp);
+
+            gameScreen.button1.setText(">");
+            gameScreen.button2.setText("");
+            gameScreen.button3.setText("");
+
+            gameScreen.story.nextPosition1 = "";
+            gameScreen.story.nextPosition2 = "";
+            gameScreen.story.nextPosition3 = "";
+
+            gameScreen.button2.setVisibility(View.INVISIBLE);
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+        }
+        else {
+            kingGoblin();
+            gameScreen.monster.elderGoblin();
             gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
+            gameScreen.story.nextPosition = "elderGoblinDrop";
+            gameScreen.gameTextView.setText("Bạn quyết định không giúp goblin, từ chối chia sẻ thảo dược. Với ánh mắt đầy phẫn nộ, goblin chiến binh rít lên: 'Ngươi sẽ hối hận vì điều này!'\n\n" + "Hắn rút vũ khí ra, lao tới với ý định cướp lấy thảo dược bằng vũ lực. Trận chiến nảy lửa sắp bắt đầu, và bạn siết chặt tay chuẩn bị đối đầu với kẻ thù thù địch.");
+        }
+        gameScreen.story.savePosition = "noHelpGoblin";
+    }
+
+    public void kingGoblin(){
+        gameScreen.story.nextPosition = "kingGoblinDrop";
+        if (boneDart > 0){
+            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
+            gameScreen.monster.kingGoblin();
             gameScreen.gameTextView.setText("Goblin nhìn bạn với vẻ căm hận, tiếng gầm gừ đầy giận dữ vang vọng khắp khu rừng. Bạn cảm nhận rõ ràng rằng cuộc đối đầu này là không thể tránh khỏi, và chỉ có một trong hai người rời khỏi nơi đây còn sống.");
             gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
 
@@ -470,21 +530,112 @@ public class StoryTenebris {
             gameScreen.story.showAllButton();
 
             gameScreen.button1.setText("Tấn công");
-            gameScreen.button2.setText("Dùng phi tiêu (còn lại: "+bonedart);
+            gameScreen.button2.setText("Dùng phi tiêu xương (x"+boneDart+")");
             gameScreen.button3.setText("");
 
             gameScreen.story.nextPosition1 = "attack1";
             gameScreen.story.nextPosition2 = "boneDart";
             gameScreen.story.nextPosition3 = "";
 
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+        }
+        else {
+            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
+            gameScreen.monster.kingGoblin();
+            gameScreen.gameTextView.setText("Goblin nhìn bạn với vẻ căm hận, tiếng gầm gừ đầy giận dữ vang vọng khắp khu rừng. Bạn cảm nhận rõ ràng rằng cuộc đối đầu này là không thể tránh khỏi, và chỉ có một trong hai người rời khỏi nơi đây còn sống.");
+            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+
+            gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
+
+            gameScreen.story.showAllButton();
+
+            gameScreen.button1.setText("Tấn công");
+            gameScreen.button2.setText("");
+            gameScreen.button3.setText("");
+
+            gameScreen.story.nextPosition1 = "attack1";
+            gameScreen.story.nextPosition2 = "";
+            gameScreen.story.nextPosition3 = "";
+
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
-        gameScreen.story.savePosition = "elderGoblin";
+        gameScreen.story.savePosition = "kingGoblin";
     }
 
     public void boneDart(){
-        gameScreen.battle.random();
+        if (Objects.equals(gameScreen.story.nextPosition, "elderGoblinDrop")){
+            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
+        } else if( Objects.equals(gameScreen.story.nextPosition, "kingGoblinDrop")){
+            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
+        }
+        gameScreen.battle.boneDart();
+        if(gameScreen.player.playerHp <=0){
+            gameScreen.button1.setText("Bạn đã bị đánh bại!!!");
+            gameScreen.button2.setText("");
+            gameScreen.button3.setText("");
+
+            gameScreen.story.nextPosition1 = "dead";
+            gameScreen.story.nextPosition2 = "";
+            gameScreen.story.nextPosition3 = "";
+
+            gameScreen.button2.setVisibility(View.INVISIBLE);
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+        }
+        else if (gameScreen.monster.monsterHP <=0) {
+            gameScreen.button1.setText(">");
+            gameScreen.button2.setText("");
+            gameScreen.button3.setText("");
+
+            gameScreen.story.nextPosition1 = gameScreen.story.nextPosition;
+            gameScreen.story.nextPosition2 = "";
+            gameScreen.story.nextPosition3 = "";
+
+            gameScreen.button2.setVisibility(View.INVISIBLE);
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+            gameScreen.player.playerExpGain();
+            gameScreen.player.dropHealingPotion();
+            gameScreen.gameTextView.setText("Bạn đã thành công đánh bại kẻ địch! Hắn ngã xuống, và chiến thắng là của bạn.\n\nBạn nhận được một bình máu, giúp hồi phục sức khỏe và chuẩn bị cho những thử thách tiếp theo.");
+            gameScreen.monsterAttackTextView.setText("");
+            gameScreen.monsterHPTextView.setText("");
+        }
+        else if (gameScreen.player.playerHp <=0 && gameScreen.monster.monsterHP <=0) {
+            gameScreen.gameTextView.setText("Bạn và kẻ thù đồng quy vu tận! Cuộc chiến kết thúc trong sự đổ máu và đau đớn, cả hai đều ngã xuống, không ai chiến thắng. Mặc dù vậy, đây là cái giá phải trả cho trận chiến này—nhưng liệu cái kết này có phải là điểm dừng cuối cùng?");
+            gameScreen.button1.setText(">");
+            gameScreen.button2.setText("");
+            gameScreen.button3.setText("");
+
+            gameScreen.story.nextPosition1 = "dead";
+            gameScreen.story.nextPosition2 = "";
+            gameScreen.story.nextPosition3 = "";
+
+            gameScreen.button2.setVisibility(View.INVISIBLE);
+            gameScreen.button3.setVisibility(View.INVISIBLE);
+        }
+        else {
+            if(boneDart > 0){
+                gameScreen.button1.setText("Tấn công");
+                gameScreen.button2.setText("Dùng phi tiêu xương (x"+boneDart+")");
+                gameScreen.button3.setText("");
+
+                gameScreen.story.nextPosition1 = "attack1";
+                gameScreen.story.nextPosition2 = "boneDart";
+                gameScreen.story.nextPosition3 = "";
+
+                gameScreen.button3.setVisibility(View.INVISIBLE);
+            }else {
+                gameScreen.button1.setText("Tấn công");
+                gameScreen.button2.setText("");
+                gameScreen.button3.setText("");
+
+                gameScreen.story.nextPosition1 = "attack1";
+                gameScreen.story.nextPosition2 = "";
+                gameScreen.story.nextPosition3 = "";
+
+                gameScreen.button2.setVisibility(View.INVISIBLE);
+                gameScreen.button3.setVisibility(View.INVISIBLE);
+            }
+        }
         gameScreen.story.savePosition = "boneDart";
     }
 
@@ -503,7 +654,6 @@ public class StoryTenebris {
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else if (gameScreen.monster.monsterHP <=0) {
-            gameScreen.gameTextView.setText("Bạn đã thành công đánh bại kẻ địch! Hắn ngã xuống, và chiến thắng là của bạn!!!");
 
             gameScreen.button1.setText(">");
             gameScreen.button2.setText("");
@@ -516,10 +666,10 @@ public class StoryTenebris {
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
             gameScreen.player.playerExpGain();
-            if(gameScreen.battle.percent <=6) {
-                gameScreen.player.dropHealingPotion();
-                gameScreen.gameTextView.setText("Bạn đã thành công đánh bại kẻ địch! Hắn ngã xuống, và chiến thắng là của bạn.\n\nBạn nhận được một bình máu, giúp hồi phục sức khỏe và chuẩn bị cho những thử thách tiếp theo.");
-            }
+
+            gameScreen.player.dropHealingPotion();
+            gameScreen.gameTextView.setText("Bạn đã thành công đánh bại kẻ địch! Hắn ngã xuống, và chiến thắng là của bạn.\n\nBạn nhận được một bình máu, giúp hồi phục sức khỏe và chuẩn bị cho những thử thách tiếp theo.");
+
             gameScreen.monsterAttackTextView.setText("");
             gameScreen.monsterHPTextView.setText("");
         }
@@ -537,15 +687,28 @@ public class StoryTenebris {
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else {
-            gameScreen.button1.setText("Tấn công");
-            gameScreen.button2.setText("Bỏ chạy (30% cơ hội)");
-            gameScreen.button3.setText("");
+            if(boneDart > 0){
+                gameScreen.button1.setText("Tấn công");
+                gameScreen.button2.setText("Dùng phi tiêu xương (x"+boneDart+")");
+                gameScreen.button3.setText("");
 
-            gameScreen.story.nextPosition1 = "attack";
-            gameScreen.story.nextPosition2 = gameScreen.story.nextPositionTwo;
-            gameScreen.story.nextPosition3 = "";
+                gameScreen.story.nextPosition1 = "attack1";
+                gameScreen.story.nextPosition2 = "boneDart";
+                gameScreen.story.nextPosition3 = "";
 
-            gameScreen.button3.setVisibility(View.INVISIBLE);
+                gameScreen.button3.setVisibility(View.INVISIBLE);
+            }else {
+                gameScreen.button1.setText("Tấn công");
+                gameScreen.button2.setText("");
+                gameScreen.button3.setText("");
+
+                gameScreen.story.nextPosition1 = "attack1";
+                gameScreen.story.nextPosition2 = "";
+                gameScreen.story.nextPosition3 = "";
+
+                gameScreen.button2.setVisibility(View.INVISIBLE);
+                gameScreen.button3.setVisibility(View.INVISIBLE);
+            }
         }
         gameScreen.story.savePosition = "attack1";
     }
