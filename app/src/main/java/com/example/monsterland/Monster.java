@@ -1,6 +1,9 @@
 package com.example.monsterland;
 
-import java.util.Random;
+import android.annotation.SuppressLint;
+
+@SuppressLint("SetTextI18n")
+
 
 public class Monster {
     GameScreen gameScreen;

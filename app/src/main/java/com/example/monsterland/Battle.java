@@ -1,7 +1,10 @@
 package com.example.monsterland;
 
+import android.annotation.SuppressLint;
+
 import java.util.Objects;
 import java.util.Random;
+@SuppressLint("SetTextI18n")
 
 public class Battle {
     GameScreen gameScreen;
@@ -160,14 +163,12 @@ public class Battle {
         hp = gameScreen.player.playerMaxHp * randomHP / 10 / 10;
         if(gameScreen.player.playerHp > hp) {
             gameScreen.player.playerHp -= hp;
-            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
-            gameScreen.gameTextView.setText("Chạy trốn không thành công, bạn bị đối thủ tấn công và thương tích, giờ đây chỉ còn cách chiến đấu đến cùng!!! Bạn mất "+ hp +" điểm sức khỏe!!!");
         }
         else {
             gameScreen.player.playerHp -= (gameScreen.player.playerHp - 1);
-            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
-            gameScreen.gameTextView.setText("Chạy trốn không thành công, bạn bị đối thủ tấn công và thương tích, giờ đây chỉ còn cách chiến đấu đến cùng!!! Bạn mất "+ hp +" điểm sức khỏe!!!");
         }
+        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+        gameScreen.gameTextView.setText("Chạy trốn không thành công, bạn bị đối thủ tấn công và thương tích, giờ đây chỉ còn cách chiến đấu đến cùng!!! Bạn mất "+ hp +" điểm sức khỏe!!!");
     }
 
     public void boneDart(){

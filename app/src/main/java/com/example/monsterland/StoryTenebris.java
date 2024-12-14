@@ -1,8 +1,10 @@
 package com.example.monsterland;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 
 import java.util.Objects;
+@SuppressLint("SetTextI18n")
 
 public class StoryTenebris {
     GameScreen gameScreen;
@@ -99,9 +101,7 @@ public class StoryTenebris {
 
             gameScreen.story.nextPosition1 = "repay";
             gameScreen.story.nextPosition2 = "noRepay";
-            gameScreen.story.nextPosition3 = "";
 
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else {
             gameScreen.gameTextView.setText("Bạn tiến lại gần goblin, hy vọng xin một ít thức ăn, nhưng đứa trẻ nhìn bạn với vẻ mặt cảnh giác. Nó lắc đầu, giữ chặt miếng thịt trong tay và lùi lại một bước. Ánh mắt đầy phòng thủ, như thể không muốn chia sẻ bất cứ thứ gì. Bạn cảm nhận rõ sự nguy hiểm tiềm ẩn trong hành động của goblin và nhận ra rằng việc tiếp tục xin thức ăn có thể không phải là lựa chọn tốt.");
@@ -117,10 +117,10 @@ public class StoryTenebris {
 
             gameScreen.story.nextPosition1 = "meatRobbery";
             gameScreen.story.nextPosition2 = "leave";
-            gameScreen.story.nextPosition3 = "";
 
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.nextPosition3 = "";
+        gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "pleaseMeat";
     }
 
@@ -333,8 +333,6 @@ public class StoryTenebris {
 
             gameScreen.story.nextPosition1 = "attackWolf";
             gameScreen.story.nextPosition2 = "retreat";
-            gameScreen.story.nextPosition3 = "";
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else {
             gameScreen.gameTextView.setText("Bạn bắt đầu hành trình tìm kiếm thảo dược trong rừng sâu. Đúng như dự đoán, khu rừng đầy rẫy những nguy hiểm rình rập, và sau nhiều giờ tìm kiếm, bạn phát hiện ra loại thảo dược quý hiếm đang mọc trong một khu vực hẻo lánh. Nhưng không may, nó đang được một con sói lớn canh giữ, với đôi mắt sắc lạnh và bộ lông sẫm màu phản chiếu ánh sáng. Con sói gầm gừ, sẵn sàng lao tới bất cứ lúc nào.");
@@ -347,10 +345,10 @@ public class StoryTenebris {
 
             gameScreen.story.nextPosition1 = "attackWolf";
             gameScreen.story.nextPosition2 = "distract";
-            gameScreen.story.nextPosition3 = "";
 
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.story.nextPosition3 = "";
+        gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.monsterAttackTextView.setText("");
         gameScreen.monsterHPTextView.setText("");
         gameScreen.story.savePosition = "findHerb";
@@ -452,7 +450,6 @@ public class StoryTenebris {
         }
         gameScreen.story.savePosition = "backToVillage";
     }
-
     public void helpGoblin(){
         gameScreen.gameImageView.setImageResource(R.drawable.herbsbundle);
         if(!repayGoblin) {
@@ -461,32 +458,20 @@ public class StoryTenebris {
 
             gameScreen.story.showAllButton();
 
-            gameScreen.button1.setText(">");
-            gameScreen.button2.setText("");
-            gameScreen.button3.setText("");
-
-            gameScreen.story.nextPosition1 = "";
-            gameScreen.story.nextPosition2 = "";
-            gameScreen.story.nextPosition3 = "";
-
-            gameScreen.button2.setVisibility(View.INVISIBLE);
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         }else {
             gameScreen.gameTextView.setText("Bạn quyết định chia sẻ một nửa thảo dược của mình với goblin. Đôi mắt nó sáng lên, đầy bất ngờ và cảm kích. Goblin cúi đầu, đưa tay nhận lấy phần thảo dược một cách kính cẩn.\n\n" + "Để đáp lại, goblin trao cho bạn một chiếc khiên nhỏ. 'Cảm ơn, bạn thật sự tốt bụng,' goblin lí nhí nói bằng thứ tiếng khàn khàn của nó.");            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
 
             gameScreen.player.smallShield = true;
 
-            gameScreen.button1.setText(">");
-            gameScreen.button2.setText("") ;
-            gameScreen.button3.setText("");
-
-            gameScreen.story.nextPosition1 = "";
-            gameScreen.story.nextPosition2 = "";
-            gameScreen.story.nextPosition3 = "";
-
-            gameScreen.button2.setVisibility(View.INVISIBLE);
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         }
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+        gameScreen.story.nextPosition1 = "";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "helpGoblin";
     }
 
@@ -599,19 +584,6 @@ public class StoryTenebris {
             gameScreen.monsterAttackTextView.setText("");
             gameScreen.monsterHPTextView.setText("");
         }
-        else if (gameScreen.player.playerHp <=0 && gameScreen.monster.monsterHP <=0) {
-            gameScreen.gameTextView.setText("Bạn và kẻ thù đồng quy vu tận! Cuộc chiến kết thúc trong sự đổ máu và đau đớn, cả hai đều ngã xuống, không ai chiến thắng. Mặc dù vậy, đây là cái giá phải trả cho trận chiến này—nhưng liệu cái kết này có phải là điểm dừng cuối cùng?");
-            gameScreen.button1.setText(">");
-            gameScreen.button2.setText("");
-            gameScreen.button3.setText("");
-
-            gameScreen.story.nextPosition1 = "dead";
-            gameScreen.story.nextPosition2 = "";
-            gameScreen.story.nextPosition3 = "";
-
-            gameScreen.button2.setVisibility(View.INVISIBLE);
-            gameScreen.button3.setVisibility(View.INVISIBLE);
-        }
         else {
             if(boneDart > 0){
                 gameScreen.button1.setText("Tấn công");
@@ -672,19 +644,6 @@ public class StoryTenebris {
 
             gameScreen.monsterAttackTextView.setText("");
             gameScreen.monsterHPTextView.setText("");
-        }
-        else if (gameScreen.player.playerHp <=0 && gameScreen.monster.monsterHP <=0) {
-            gameScreen.gameTextView.setText("Bạn và kẻ thù đồng quy vu tận! Cuộc chiến kết thúc trong sự đổ máu và đau đớn, cả hai đều ngã xuống, không ai chiến thắng. Mặc dù vậy, đây là cái giá phải trả cho trận chiến này—nhưng liệu cái kết này có phải là điểm dừng cuối cùng?");
-            gameScreen.button1.setText(">");
-            gameScreen.button2.setText("");
-            gameScreen.button3.setText("");
-
-            gameScreen.story.nextPosition1 = "dead";
-            gameScreen.story.nextPosition2 = "";
-            gameScreen.story.nextPosition3 = "";
-
-            gameScreen.button2.setVisibility(View.INVISIBLE);
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else {
             if(boneDart > 0){

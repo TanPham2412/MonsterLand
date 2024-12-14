@@ -1,14 +1,15 @@
 
 package com.example.monsterland;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 
 import java.util.Objects;
+@SuppressLint("SetTextI18n")
 
 public class StoryCastle {
     GameScreen gameScreen;
     boolean knightDead = false;
-    String image;
     public StoryCastle(GameScreen gameScreen){
         this.gameScreen = gameScreen;
     }
@@ -66,7 +67,6 @@ public class StoryCastle {
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "meetCat";
     }
-
     public void trashCan(){
         gameScreen.gameImageView.setImageResource(R.drawable.trash);
         gameScreen.gameTextView.setText("Bạn nhìn thấy một con dao, tuy bị rỉ sét nhưng vẫn sắc bén và chắc chắn hơn cây gậy gỗ hiện tại. Món đồ này có thể sẽ giúp ích trong những tình huống nguy hiểm sắp tới.\n" + "\n" + "Bạn có muốn thay gậy gỗ bằng con dao này không?");
@@ -84,10 +84,9 @@ public class StoryCastle {
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "trashCan";
     }
-
     public void useKnife(){
         gameScreen.gameImageView.setImageResource(R.drawable.rustyknife);
-        gameScreen.gameTextView.setText("\n" + "Bạn trang bị con dao thành công, cảm nhận sự vững chắc và sắc bén của nó trong tay. Sức mạnh của bạn đã tăng lên, điểm tấn công hiện tại là 3 - 5, khiến bạn tự tin hơn.\n" + "\n" + "Bạn tiếp tục bước về phía trước, sẵn sàng đối mặt với những thử thách tiếp theo.");
+        gameScreen.gameTextView.setText("Bạn trang bị con dao thành công, cảm nhận sự vững chắc và sắc bén của nó trong tay. Sức mạnh của bạn đã tăng lên, điểm tấn công hiện tại là 3 - 5, khiến bạn tự tin hơn.\n" + "\n" + "Bạn tiếp tục bước về phía trước, sẵn sàng đối mặt với những thử thách tiếp theo.");
         gameScreen.player.playerUseRustyKnife();
         gameScreen.button1.setText(">");
         gameScreen.button2.setText("");
@@ -100,7 +99,6 @@ public class StoryCastle {
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "useKnife";
     }
-
     public void notUseKnife(){
         gameScreen.gameImageView.setImageResource(R.drawable.go);
         gameScreen.gameTextView.setText("Bạn liếc qua món đồ, nhưng quyết định không dừng lại. Cảm giác khẩn trương thôi thúc bạn tiếp tục bước đi, hướng về phía trước, nơi những nguy hiểm vẫn đang chờ đón.");
@@ -116,7 +114,6 @@ public class StoryCastle {
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "notUseKnife";
     }
-
     public void alley(){
         gameScreen.gameImageView.setImageResource(R.drawable.waysign);
         gameScreen.gameTextView.setText("Đứng trước con hẻm tối tăm, bạn cảm nhận rõ sự nguy hiểm đang rình rập phía trong. Đám du côn tụ tập ở đó, ánh mắt họ sắc lạnh và đầy thách thức.\n" + "\n" + "Bạn sẽ chọn đối mặt với họ, tìm cách vượt qua, hay tìm lối khác để tránh rắc rối?");
@@ -134,7 +131,6 @@ public class StoryCastle {
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "alley";
     }
-
     public void intoAlley(){
         gameScreen.story.nextPosition = "banditKnife";
         gameScreen.story.nextPositionTwo = "run";
@@ -219,19 +215,6 @@ public class StoryCastle {
 
             gameScreen.monsterAttackTextView.setText("");
             gameScreen.monsterHPTextView.setText("");
-        }
-        else if (gameScreen.player.playerHp <=0 && gameScreen.monster.monsterHP <=0) {
-            gameScreen.gameTextView.setText("Bạn và kẻ thù đồng quy vu tận! Cuộc chiến kết thúc trong sự đổ máu và đau đớn, cả hai đều ngã xuống, không ai chiến thắng. Mặc dù vậy, đây là cái giá phải trả cho trận chiến này—nhưng liệu cái kết này có phải là điểm dừng cuối cùng?");
-            gameScreen.button1.setText(">");
-            gameScreen.button2.setText("");
-            gameScreen.button3.setText("");
-
-            gameScreen.story.nextPosition1 = "dead";
-            gameScreen.story.nextPosition2 = "";
-            gameScreen.story.nextPosition3 = "";
-
-            gameScreen.button2.setVisibility(View.INVISIBLE);
-            gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else {
             gameScreen.button1.setText("Tấn công");

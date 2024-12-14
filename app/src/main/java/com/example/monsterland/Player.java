@@ -1,9 +1,11 @@
 package com.example.monsterland;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.widget.Toast;
 
 import java.util.Random;
+@SuppressLint("SetTextI18n")
 
 public class Player {
 
@@ -64,12 +66,7 @@ public class Player {
     public void showToast(String message, int timeShowMessage) {
         Toast toast = Toast.makeText(gameScreen, message, Toast.LENGTH_LONG);
         toast.show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                toast.cancel();
-            }
-        }, timeShowMessage);
+        new Handler().postDelayed(toast::cancel, timeShowMessage);
     }
     public void playerExpGain(){
         expGain = 60 + random.nextInt(41);
