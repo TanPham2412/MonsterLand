@@ -25,6 +25,9 @@ public class Story {
             case "opening1":
                 gameScreen.storyCastle.opening1();
                 break;
+            case "opening":
+                gameScreen.storyCastle.opening();
+                break;
             case "opening2":
                 gameScreen.storyCastle.opening2();
                 break;
@@ -36,6 +39,9 @@ public class Story {
                 break;
             case "useKnife":
                 gameScreen.storyCastle.useKnife();
+                break;
+            case "useKnife1":
+                gameScreen.storyCastle.useKnife1();
                 break;
             case "notUseKnife":
                 gameScreen.storyCastle.notUseKnife();
@@ -52,6 +58,15 @@ public class Story {
             case "attack":
                 gameScreen.storyCastle.attack();
                 break;
+            case "waitAttack":
+                gameScreen.storyCastle.waitAttack();
+                break;
+            case "winAttack":
+                gameScreen.storyCastle.winAttack();
+                break;
+            case "deadAttack":
+                gameScreen.storyCastle.deadAttack();
+                break;
             case "run":
                 gameScreen.storyCastle.run();
                 break;
@@ -66,6 +81,9 @@ public class Story {
                 break;
             case "banditKnife":
                 gameScreen.storyCastle.banditKnife();
+                break;
+            case "banditKnife1":
+                gameScreen.storyCastle.banditKnife1();
                 break;
             case "intoAlley1":
                 gameScreen.storyCastle.intoAlley1();
@@ -84,6 +102,9 @@ public class Story {
                 break;
             case "useLeatherArmor":
                 gameScreen.storyCastle.useLeatherArmor();
+                break;
+            case "useLeatherArmor1":
+                gameScreen.storyCastle.useLeatherArmor1();
                 break;
             case "notUseLeatherArmor":
                 gameScreen.storyCastle.notUseLeatherArmor();
@@ -105,6 +126,9 @@ public class Story {
                 break;
             case "knightDead":
                 gameScreen.storyCastle.knightDead();
+                break;
+            case "knightDead1":
+                gameScreen.storyCastle.knightDead1();
                 break;
             case "woodenSign":
                 gameScreen.storyCastle.woodenSign();
@@ -129,6 +153,9 @@ public class Story {
                 break;
             case "repay":
                 gameScreen.storyTenebris.repay();
+                break;
+            case "repay1":
+                gameScreen.storyTenebris.repay1();
                 break;
             case "noRepay":
                 gameScreen.storyTenebris.noRepay();
@@ -175,8 +202,26 @@ public class Story {
             case "boneDart":
                 gameScreen.storyTenebris.boneDart();
                 break;
+            case "winBoneDart":
+                gameScreen.storyTenebris.winBoneDart();
+                break;
+            case "deadBoneDart":
+                gameScreen.storyTenebris.deadBoneDart();
+                break;
+            case "waitBoneDart":
+                gameScreen.storyTenebris.waitBoneDart();
+                break;
             case "attack1":
                 gameScreen.storyTenebris.attack1();
+                break;
+            case "waitAttack1":
+                gameScreen.storyTenebris.waitAttack1();
+                break;
+            case "winAttack1":
+                gameScreen.storyTenebris.winAttack1();
+                break;
+            case "deadAttack1":
+                gameScreen.storyTenebris.deadAttack1();
                 break;
             case "helpGoblin":
                 gameScreen.storyTenebris.helpGoblin();

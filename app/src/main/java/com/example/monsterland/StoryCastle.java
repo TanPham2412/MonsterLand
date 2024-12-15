@@ -30,7 +30,29 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
-        gameScreen.story.savePosition = "opening1";
+        gameScreen.story.savePosition = "opening";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+    }
+
+    public void opening(){
+        gameScreen.gameImageView.setImageResource(R.drawable.city);
+        gameScreen.gameTextView.setText("Bạn sống trong thành phố Umbra, nơi một lời nguyền cổ xưa đã đè nặng lên đời sống của người dân, khiến nhiều người mắc phải các biến chứng kỳ lạ. Những cơn gió mang theo mùi hương tẩm thuốc và bóng tối vương vấn trong không gian.");
+        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+
+        gameScreen.healingPotionTextView.setText("x"+gameScreen.player.healingPotion);
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "opening2";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "opening";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
 
     public void opening2(){
@@ -48,6 +70,8 @@ public class StoryCastle {
         gameScreen.story.nextPosition2 = "";
         gameScreen.story.nextPosition3 = "";
         gameScreen.story.savePosition = "opening2";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
 
     public void meetCat(){
@@ -66,6 +90,8 @@ public class StoryCastle {
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "meetCat";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
     public void trashCan(){
         gameScreen.gameImageView.setImageResource(R.drawable.trash);
@@ -83,6 +109,8 @@ public class StoryCastle {
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "trashCan";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
     public void useKnife(){
         gameScreen.gameImageView.setImageResource(R.drawable.rustyknife);
@@ -97,8 +125,27 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
-        gameScreen.story.savePosition = "useKnife";
+        gameScreen.story.savePosition = "useKnife1";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
+    public void useKnife1() {
+        gameScreen.gameImageView.setImageResource(R.drawable.rustyknife);
+        gameScreen.gameTextView.setText("Bạn trang bị con dao thành công, cảm nhận sự vững chắc và sắc bén của nó trong tay. Sức mạnh của bạn đã tăng lên, điểm tấn công hiện tại là 3 - 5, khiến bạn tự tin hơn.\n" + "\n" + "Bạn tiếp tục bước về phía trước, sẵn sàng đối mặt với những thử thách tiếp theo.");
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "alley";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "useKnife1";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+    }
+
     public void notUseKnife(){
         gameScreen.gameImageView.setImageResource(R.drawable.go);
         gameScreen.gameTextView.setText("Bạn liếc qua món đồ, nhưng quyết định không dừng lại. Cảm giác khẩn trương thôi thúc bạn tiếp tục bước đi, hướng về phía trước, nơi những nguy hiểm vẫn đang chờ đón.");
@@ -113,6 +160,8 @@ public class StoryCastle {
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "notUseKnife";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
     public void alley(){
         gameScreen.gameImageView.setImageResource(R.drawable.waysign);
@@ -130,6 +179,8 @@ public class StoryCastle {
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "alley";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
     public void intoAlley(){
         gameScreen.story.nextPosition = "banditKnife";
@@ -177,10 +228,12 @@ public class StoryCastle {
             gameScreen.gameImageView.setImageResource(R.drawable.hood);
         } else if(Objects.equals(gameScreen.story.nextPosition, "leatherArmor")){
             gameScreen.gameImageView.setImageResource(R.drawable.gatekeeper);
-        } else if(Objects.equals(gameScreen.story.nextPosition, "deadKnight")){
+        } else if(Objects.equals(gameScreen.story.nextPosition, "knightDead")){
             gameScreen.gameImageView.setImageResource(R.drawable.knight);
         } else if(Objects.equals(gameScreen.story.nextPosition, "killedGoblin")){
             gameScreen.gameImageView.setImageResource(R.drawable.goblin);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "killedWolf")){
+            gameScreen.gameImageView.setImageResource(R.drawable.wolfhead);
         }
 
         gameScreen.battle.attack();
@@ -196,6 +249,12 @@ public class StoryCastle {
 
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
+            gameScreen.monsterHPTextView.setText("");
+            gameScreen.monsterAttackTextView.setText("");
+            gameScreen.playerAttackTextView.setText("");
+            gameScreen.playerHPTextView.setText("");
+            gameScreen.story.savePosition = "deadAttack";
+
         }
         else if (gameScreen.monster.monsterHP <=0) {
             gameScreen.button1.setText(">");
@@ -215,6 +274,7 @@ public class StoryCastle {
 
             gameScreen.monsterAttackTextView.setText("");
             gameScreen.monsterHPTextView.setText("");
+            gameScreen.story.savePosition = "winAttack";
         }
         else {
             gameScreen.button1.setText("Tấn công");
@@ -226,9 +286,96 @@ public class StoryCastle {
             gameScreen.story.nextPosition3 = "";
 
             gameScreen.button3.setVisibility(View.INVISIBLE);
-
+            gameScreen.story.savePosition = "waitAttack";
         }
-        gameScreen.story.savePosition = "attack";
+    }
+
+    public void winAttack(){
+        if (Objects.equals(gameScreen.story.nextPosition, "banditKnife")){
+            gameScreen.gameImageView.setImageResource(R.drawable.bandit);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "outsideCastle")){
+            gameScreen.gameImageView.setImageResource(R.drawable.hood);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "leatherArmor")){
+            gameScreen.gameImageView.setImageResource(R.drawable.gatekeeper);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "knightDead")){
+            gameScreen.gameImageView.setImageResource(R.drawable.knight);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "killedGoblin")){
+            gameScreen.gameImageView.setImageResource(R.drawable.goblin);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "killedWolf")){
+            gameScreen.gameImageView.setImageResource(R.drawable.wolfhead);
+        }
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = gameScreen.story.nextPosition;
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+
+        gameScreen.gameTextView.setText("Bạn đã thành công đánh bại kẻ địch! Hắn ngã xuống, và chiến thắng là của bạn.\n\nBạn nhận được một bình máu, giúp hồi phục sức khỏe và chuẩn bị cho những thử thách tiếp theo.");
+
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+        gameScreen.story.savePosition = "winAttack";
+    }
+
+    public void deadAttack(){
+        if (Objects.equals(gameScreen.story.nextPosition, "banditKnife")){
+            gameScreen.gameImageView.setImageResource(R.drawable.bandit);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "outsideCastle")){
+            gameScreen.gameImageView.setImageResource(R.drawable.hood);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "leatherArmor")){
+            gameScreen.gameImageView.setImageResource(R.drawable.gatekeeper);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "knightDead")){
+            gameScreen.gameImageView.setImageResource(R.drawable.knight);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "killedGoblin")){
+            gameScreen.gameImageView.setImageResource(R.drawable.goblin);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "killedWolf")){
+            gameScreen.gameImageView.setImageResource(R.drawable.wolfhead);
+        }
+        gameScreen.button1.setText("Bạn đã bị đánh bại!!!");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "dead";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "deadAttack";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+    }
+
+    public void waitAttack(){
+        if (Objects.equals(gameScreen.story.nextPosition, "banditKnife")){
+            gameScreen.gameImageView.setImageResource(R.drawable.bandit);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "outsideCastle")){
+            gameScreen.gameImageView.setImageResource(R.drawable.hood);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "leatherArmor")){
+            gameScreen.gameImageView.setImageResource(R.drawable.gatekeeper);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "knightDead")){
+            gameScreen.gameImageView.setImageResource(R.drawable.knight);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "killedGoblin")){
+            gameScreen.gameImageView.setImageResource(R.drawable.goblin);
+        } else if(Objects.equals(gameScreen.story.nextPosition, "killedWolf")){
+            gameScreen.gameImageView.setImageResource(R.drawable.wolfhead);
+        }
+
+        gameScreen.button1.setText("Tấn công");
+        gameScreen.button2.setText("Bỏ chạy (30% cơ hội)");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "attack";
+        gameScreen.story.nextPosition2 = gameScreen.story.nextPositionTwo;
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "waitAttack";
     }
 
     public void run(){
@@ -250,6 +397,8 @@ public class StoryCastle {
             gameScreen.story.nextPosition3 = "";
 
             gameScreen.button3.setVisibility(View.INVISIBLE);
+            gameScreen.monsterAttackTextView.setText("");
+            gameScreen.monsterHPTextView.setText("");
         }
         else {
             gameScreen.battle.run();
@@ -287,6 +436,8 @@ public class StoryCastle {
             gameScreen.story.nextPosition3 = "";
 
             gameScreen.button3.setVisibility(View.INVISIBLE);
+            gameScreen.monsterAttackTextView.setText("");
+            gameScreen.monsterHPTextView.setText("");
         }
         else {
             gameScreen.gameImageView.setImageResource(R.drawable.bandit);
@@ -322,7 +473,29 @@ public class StoryCastle {
 
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
-        gameScreen.story.savePosition = "banditKnife";
+        gameScreen.story.savePosition = "banditKnife1";
+        gameScreen.monsterHPTextView.setText("");
+        gameScreen.monsterAttackTextView.setText("");
+    }
+
+    public void banditKnife1(){
+        gameScreen.gameImageView.setImageResource(R.drawable.banditknife);
+        gameScreen.gameTextView.setText("Sau một cuộc giao đấu căng thẳng, bạn cuối cùng cũng tiêu diệt được tên côn đồ. Hắn gục xuống, thở dốc và không còn khả năng phản kháng. Khi kiểm tra thi thể của hắn, bạn tìm thấy một con dao sắc bén được giấu kỹ trong áo hắn. Con dao có vẻ là một công cụ hữu ích trong hành trình tiếp theo của bạn, nên bạn quyết định cầm lấy nó.");
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.showAllButton();
+
+        gameScreen.story.nextPosition1 = "intoAlley1";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+        gameScreen.story.savePosition = "banditKnife1";
+        gameScreen.monsterHPTextView.setText("");
+        gameScreen.monsterAttackTextView.setText("");
     }
 
     public void dead(){
@@ -339,6 +512,8 @@ public class StoryCastle {
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "dead";
+        gameScreen.monsterHPTextView.setText("");
+        gameScreen.monsterAttackTextView.setText("");
     }
 
     public void intoAlley1(){
@@ -359,6 +534,8 @@ public class StoryCastle {
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "intoAlley1";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
 
     public void outsideCastle(){
@@ -378,6 +555,7 @@ public class StoryCastle {
         gameScreen.monsterHPTextView.setText("");
         gameScreen.monsterAttackTextView.setText("");
         gameScreen.story.savePosition = "outsideCastle";
+
     }
     public void keepGoing(){
         gameScreen.story.nextPositionTwo = "run";
@@ -394,6 +572,7 @@ public class StoryCastle {
         gameScreen.story.nextPosition1 = "checkAtGate";
         gameScreen.story.nextPosition2 = "attack";
         gameScreen.story.nextPosition3 = "alley";
+
         gameScreen.story.savePosition = "keepGoing";
     }
 
@@ -430,15 +609,17 @@ public class StoryCastle {
 
             gameScreen.button2.setVisibility(View.INVISIBLE);
             gameScreen.button3.setVisibility(View.INVISIBLE);
+
+            gameScreen.monsterAttackTextView.setText("");
+            gameScreen.monsterHPTextView.setText("");
         }
         gameScreen.story.savePosition = "checkAtGate";
     }
 
     public void leatherArmor(){
         gameScreen.gameImageView.setImageResource(R.drawable.leatherarmor);
-        gameScreen.gameTextView.setText("Chiến thắng kẻ địch, bạn nhận được một bình thuốc hồi máu và một bộ giáp da. Bộ giáp nhẹ nhưng đủ chắc chắn để bảo vệ bạn khỏi những đòn tấn công cơ bản.\n" + "\n" + "Bạn có muốn trang bị giáp da ngay bây giờ không?");
+        gameScreen.gameTextView.setText("Chiến thắng kẻ địch, bạn nhận một bộ giáp da. Bộ giáp nhẹ nhưng đủ chắc chắn để bảo vệ bạn khỏi những đòn tấn công cơ bản.\n" + "\n" + "Bạn có muốn trang bị giáp da ngay bây giờ không?");
 
-        gameScreen.player.dropHealingPotion();
 
         gameScreen.button1.setText("Có");
         gameScreen.button2.setText("Không");
@@ -452,6 +633,8 @@ public class StoryCastle {
 
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "leatherArmor";
+        gameScreen.monsterHPTextView.setText("");
+        gameScreen.monsterAttackTextView.setText("");
     }
 
     public void useLeatherArmor(){
@@ -476,7 +659,30 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
-        gameScreen.story.savePosition = "useLeaderArmor";
+
+        gameScreen.story.savePosition = "useLeatherArmor1";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+    }
+
+    public void useLeatherArmor1(){
+        gameScreen.gameImageView.setImageResource(R.drawable.leatherarmor);
+        gameScreen.gameTextView.setText("Bạn trang bị bộ giáp da thành công, cảm nhận lớp bảo vệ mới che chắn cơ thể. Với nó, sát thương bạn nhận vào sẽ giảm đi một phần, tăng thêm cơ hội sống sót.\n" + "\n" + "Hít một hơi thật sâu, bạn tiếp tục tiến bước vào con đường phía trước, nơi hiểm nguy vẫn đang rình rập");
+        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "outsideCastle";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+
+        gameScreen.story.savePosition = "useLeatherArmor1";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
     public void notUseLeatherArmor(){
         gameScreen.gameImageView.setImageResource(R.drawable.go);
@@ -491,7 +697,10 @@ public class StoryCastle {
         gameScreen.story.nextPosition3 = "";
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
+
         gameScreen.story.savePosition = "outsideCastle";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
 
     public void meetMira(){
@@ -508,6 +717,8 @@ public class StoryCastle {
         gameScreen.story.nextPosition2 = "lie";
         gameScreen.story.nextPosition3 = "refuseAnswer";
         gameScreen.story.savePosition = "meetMira";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
 
     public void tellTruth(){
@@ -527,6 +738,8 @@ public class StoryCastle {
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "tellTruth";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
 
     public void lie(){
@@ -550,6 +763,8 @@ public class StoryCastle {
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "lie";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
 
     public void refuseAnswer(){
@@ -567,6 +782,8 @@ public class StoryCastle {
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "refuseAnswer";
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
     }
 
     public void getOutMiraHome(){
@@ -611,7 +828,28 @@ public class StoryCastle {
         gameScreen.monsterAttackTextView.setText("");
         gameScreen.monsterHPTextView.setText("");
         knightDead = true;
-        gameScreen.story.savePosition = "knightDead";
+        gameScreen.story.savePosition = "knightDead1";
+    }
+
+    public void knightDead1(){
+        gameScreen.gameImageView.setImageResource(R.drawable.gladius);
+        gameScreen.gameTextView.setText("Bạn nhặt thanh kiếm từ tay tên hiệp sĩ vừa gục ngã. Lưỡi kiếm gỉ sét, nhưng dường như nó tỏa ra một luồng sức mạnh bí ẩn, hòa quyện với ý chí của bạn. Một cảm giác dâng trào lan tỏa—sức mạnh của bạn đã tăng lên!");
+
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "woodenSign";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+        knightDead = true;
+        gameScreen.story.savePosition = "knightDead1";
     }
 
     public void woodenSign(){

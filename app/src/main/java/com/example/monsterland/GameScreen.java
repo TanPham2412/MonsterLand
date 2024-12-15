@@ -119,6 +119,8 @@ public class GameScreen extends AppCompatActivity {
         editor.putInt("healingPotion", player.healingPotion);
         editor.putInt("minAtk", player.minAtk);
         editor.putInt("maxAtk", player.maxAtk);
+        editor.putInt("oldMinAtk", player.oldMinAtk);
+        editor.putInt("oldMaxAtk", player.oldMaxAtk);
         editor.putInt("expNeed", player.expNeed);
         editor.putBoolean("leatherArmor", player.leatherArmor);
         editor.putBoolean("specialPotion", player.specialPotion);
@@ -157,6 +159,8 @@ public class GameScreen extends AppCompatActivity {
             player.healingPotion = sharedPreferences.getInt("healingPotion", player.healingPotion);
             player.minAtk = sharedPreferences.getInt("minAtk", player.minAtk);
             player.maxAtk = sharedPreferences.getInt("maxAtk", player.maxAtk);
+            player.oldMinAtk = sharedPreferences.getInt("oldMinAtk", player.oldMinAtk);
+            player.oldMaxAtk = sharedPreferences.getInt("oldMaxAtk", player.oldMaxAtk);
             player.expNeed = sharedPreferences.getInt("expNeed", player.expNeed);
 
             player.leatherArmor = sharedPreferences.getBoolean("leatherArmor", player.leatherArmor);

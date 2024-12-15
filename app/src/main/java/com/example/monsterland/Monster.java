@@ -15,9 +15,9 @@ public class Monster {
         monsterHP = 50;
         minAtk = 2;
         maxAtk = 3;
+        gameScreen.player.playerUseArmor();
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.player.playerUseArmor();
         gameScreen.story.race = "primate";
     }
 
@@ -35,9 +35,9 @@ public class Monster {
         monsterHP = 55;
         minAtk = 2;
         maxAtk = 4;
+        gameScreen.player.playerUseArmor();
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.player.playerUseArmor();
         gameScreen.story.race = "primate";
     }
 
@@ -45,19 +45,19 @@ public class Monster {
         monsterHP = 80;
         minAtk = 5;
         maxAtk = 5;
+        gameScreen.player.playerUseArmor();
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.player.playerUseArmor();
         gameScreen.story.race = "primate";
     }
 
     public void goblinChild(){
         monsterHP = 20;
-        minAtk = 1;
-        maxAtk = 3;
+        minAtk = 2;
+        maxAtk = 2;
+        gameScreen.player.playerUseArmor();
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.player.playerUseArmor();
         gameScreen.story.race = "primate";
     }
 
@@ -65,9 +65,9 @@ public class Monster {
         monsterHP = 80;
         minAtk = 6;
         maxAtk = 5;
+        gameScreen.player.playerUseArmor();
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.player.playerUseArmor();
         gameScreen.story.race = "animal";
     }
 
@@ -75,9 +75,9 @@ public class Monster {
         monsterHP = 100;
         minAtk = 6;
         maxAtk = 6;
+        gameScreen.player.playerUseArmor();
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.player.playerUseArmor();
         gameScreen.story.race = "primate";
     }
 
@@ -85,9 +85,9 @@ public class Monster {
         monsterHP = 150;
         minAtk = 10;
         maxAtk = 6;
+        gameScreen.player.playerUseArmor();
         gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.player.playerUseArmor();
         gameScreen.story.race = "primate";
     }
 }

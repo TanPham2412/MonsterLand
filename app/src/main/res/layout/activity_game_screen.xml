@@ -177,7 +177,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="6"
             android:gravity="center"
-            android:text="aaaa"
+            android:text="Chào mừng bạn đã quay lại trò chơi!!!"
             android:textColor="#FAF8F8"
             android:textSize="18sp" />
 
