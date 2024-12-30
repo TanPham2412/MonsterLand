@@ -1,7 +1,14 @@
 package com.example.monsterland;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -31,9 +38,8 @@ public class Player {
         gameScreen.playerHPTextView.setText("HP: "+playerHp+"/"+playerMaxHp);
         gameScreen.healingPotionTextView.setText("x"+healingPotion);
     }
-
-
     public void useHealingButton() {
+        flashGreenScreen();
         int hp = playerMaxHp - playerHp;
         if (healingPotion > 0) {
             if (playerHp < playerMaxHp) {
@@ -60,6 +66,31 @@ public class Player {
             gameScreen.playerHPTextView.setText("HP: "+playerHp+ "/"+playerMaxHp);
             gameScreen.healingPotionTextView.setText("x"+healingPotion);
             showToast("Bạn không có bình máu!!!", 3000);
+        }
+    }
+    private void flashGreenScreen() {
+        // Tìm View có ID heal_flash
+        View gameScreenLayout = gameScreen.findViewById(R.id.heal_flash);
+        if (gameScreenLayout != null) {
+            // Hiển thị View với hiệu ứng ánh sáng xanh
+            gameScreenLayout.setVisibility(View.VISIBLE);
+
+            // Sử dụng ArgbEvaluator cho chuyển đổi màu từ xanh sáng đến đen
+            ObjectAnimator colorAnim = ObjectAnimator.ofObject(gameScreenLayout, "backgroundColor", new ArgbEvaluator(),
+                    Color.parseColor("#86F407"), Color.parseColor("#000000")); // Từ màu xanh sáng đến màu đen
+            colorAnim.setDuration(600); // Tăng thời gian để hiệu ứng mượt mà hơn
+            colorAnim.setRepeatCount(ValueAnimator.INFINITE);  // Lặp lại hiệu ứng để tạo chuyển động
+            colorAnim.setRepeatMode(ValueAnimator.REVERSE);    // Lặp lại màu sắc theo hướng ngược lại
+            colorAnim.setInterpolator(new AccelerateDecelerateInterpolator()); // Dùng interpolator để làm hiệu ứng mượt mà
+            colorAnim.start();
+
+            Log.d("FlashEffect", "Green flash effect applied");
+
+            // Gỡ bỏ ánh sáng sau 600ms và ẩn View
+            new Handler().postDelayed(() -> {
+                gameScreenLayout.setVisibility(View.INVISIBLE); // Ẩn lại view sau khi flash
+                Log.d("FlashEffect", "Green flash disappeared");
+            }, 600); // Thời gian ẩn giống với thời gian hiệu ứng
         }
     }
 

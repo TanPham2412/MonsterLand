@@ -1,6 +1,14 @@
 package com.example.monsterland;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import java.util.Objects;
 import java.util.Random;
@@ -31,132 +39,121 @@ public class Battle {
         }
     }
 
-    public void attack(){
-        random();
-        if(gameScreen.player.smallShield){
-            if(randomPercent <= 3){
-                gameScreen.player.playerAttack = gameScreen.player.minAtk + random.nextInt(gameScreen.player.maxAtk);
-                gameScreen.monster.monsterHP -= gameScreen.player.playerAttack;
+    private void flashRedScreen() {
+        // Tìm View có ID damage_flash
+        View gameScreenLayout = gameScreen.findViewById(R.id.damage_flash);
+        if (gameScreenLayout != null) {
+            // Hiển thị View với hiệu ứng ánh sáng đỏ
+            gameScreenLayout.setVisibility(View.VISIBLE);
 
-                gameScreen.gameTextView.setText("Cú đánh của bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Đối thủ bị đẩy lùi một chút.\n\n" + "Hắn cố gắng tấn công lại, nhưng chiếc khiên của bạn đã đỡ trọn đòn đánh, giữ bạn an toàn.");
-            }else{
-                random();
-                gameScreen.player.playerAttack = gameScreen.player.minAtk + random.nextInt(gameScreen.player.maxAtk);
-                gameScreen.monster.monsterHP -= gameScreen.player.playerAttack;
+            // Sử dụng ArgbEvaluator cho chuyển đổi màu từ đỏ sáng đến đen
+            ObjectAnimator colorAnim = ObjectAnimator.ofObject(gameScreenLayout, "backgroundColor", new ArgbEvaluator(),
+                    Color.parseColor("#FF0000"), Color.parseColor("#000000")); // Từ màu đỏ sáng đến màu đen
+            colorAnim.setDuration(600); // Tăng thời gian để hiệu ứng mượt mà hơn
+            colorAnim.setRepeatCount(ValueAnimator.INFINITE);  // Lặp lại hiệu ứng để tạo chuyển động
+            colorAnim.setRepeatMode(ValueAnimator.REVERSE);    // Lặp lại màu sắc theo hướng ngược lại
+            colorAnim.setInterpolator(new AccelerateDecelerateInterpolator()); // Dùng interpolator để làm hiệu ứng mượt mà
+            colorAnim.start();
 
-                gameScreen.monster.monterAttack = gameScreen.monster.minAtk + random.nextInt(gameScreen.monster.maxAtk);
-                gameScreen.player.playerHp -= gameScreen.monster.monterAttack;
+            Log.d("FlashEffect", "Red flash effect applied");
 
-                if (Objects.equals(gameScreen.story.race, "primate")){
-                    if(randomPercent == 1) {
-                        gameScreen.gameTextView.setText("Với một cú ra tay đầy sức mạnh, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Đối thủ lùi lại, không thể chịu nổi sức mạnh của bạn.\n\n" + "Nhưng hắn nhanh chóng đáp trả và gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn phải bước lùi.");
-                    } else if (randomPercent == 2) {
-                        gameScreen.gameTextView.setText("Bạn tấn công mạnh mẽ, gây ra "+gameScreen.player.playerAttack+" sát thương! Đối thủ loạng choạng vì cú đánh của bạn.\n\n" + "Hắn không để bạn dễ dàng thở phào, lập tức tung ra một đòn mạnh và gây "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                    } else if (randomPercent == 3) {
-                        gameScreen.gameTextView.setText("Bạn ra đòn nhanh chóng, gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương mất thế nhưng vẫn đứng vững.\n\n" + "Đối thủ phản ứng ngay, gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn phải chống đỡ.");
-                    } else if (randomPercent == 4) {
-                        gameScreen.gameTextView.setText("Cú đánh của bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương lùi lại, đôi mắt tràn đầy căm hận.\n\n" + "Hắn ngay lập tức tiến lên, phản công và gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn đau đớn.");
-                    } else if (randomPercent == 5) {
-                        gameScreen.gameTextView.setText("Bạn gây ra "+gameScreen.player.playerAttack+" sát thương với cú tấn công chuẩn xác! Đối phương lùi lại một bước.\n\n" + "Nhưng hắn không bỏ cuộc, ngay lập tức lao tới và gây ra "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                    } else if (randomPercent == 6) {
-                        gameScreen.gameTextView.setText("Với cú ra đòn mạnh mẽ, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Đối thủ bị đẩy lùi một khoảng.\n\n" + "Tuy nhiên, hắn không chần chừ, tấn công lại và gây ra "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                    } else if (randomPercent == 7) {
-                        gameScreen.gameTextView.setText("Cú đánh của bạn trúng đích, gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương khựng lại, có vẻ không kịp phản ứng.\n\n" + "Nhưng hắn lập tức hồi phục và tấn công bạn với "+gameScreen.monster.monterAttack+" sát thương.");
-                    } else if (randomPercent == 8) {
-                        gameScreen.gameTextView.setText("Bạn gây ra "+gameScreen.player.playerAttack+" sát thương mạnh mẽ, khiến đối phương phải lùi lại một chút.\n\n" + "Hắn không bỏ cuộc, lập tức đáp trả bằng một đòn hiểm hóc gây "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                    } else if (randomPercent == 9) {
-                        gameScreen.gameTextView.setText("Với một đòn quyết đoán, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương chao đảo, nhưng vẫn đứng vững.\n\n" + "Hắn ngay lập tức phản công, gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn phải lùi lại.");
-                    } else if (randomPercent == 10) {
-                        gameScreen.gameTextView.setText("Bạn ra đòn mạnh mẽ, gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương tỏ ra chật vật nhưng vẫn quyết liệt tiếp tục chiến đấu.\n\n" + "Đối thủ không dễ bị khuất phục, gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn phải dừng lại một chút.");
-                    }
-                } else if (Objects.equals(gameScreen.story.race, "animal")) {
-                    if(randomPercent == 1) {
-                        gameScreen.gameTextView.setText("Với một cú ra đòn mạnh mẽ, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú gầm lên đầy giận dữ, lùi lại vài bước.\n\n" + "Tuy nhiên, nó lập tức lao lên, vung móng vuốt sắc nhọn và gây ra "+gameScreen.monster.monterAttack+" sát thương cho bạn.");
-                    } else if (randomPercent == 2) {
-                        gameScreen.gameTextView.setText("Bạn tấn công chính xác, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú chao đảo, nhưng đôi mắt đỏ rực vẫn nhìn chằm chằm vào bạn.\n\n" + "Nó không chần chừ, lao tới với cú cắn sắc bén, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                    } else if (randomPercent == 3) {
-                        gameScreen.gameTextView.setText("Cú đánh của bạn trúng đích, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú rít lên đau đớn, nhưng vẫn không chịu khuất phục.\n\n" + "Nó đáp trả ngay lập tức, vung móng vuốt về phía bạn và gây "+gameScreen.monster.monterAttack+" sát thương.");
-                    } else if (randomPercent == 4) {
-                        gameScreen.gameTextView.setText("Với cú ra tay mạnh mẽ, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú lùi lại, gầm lên giận dữ.\n\n" + "Nó nhanh chóng phản công, nhảy tới với hàm răng sắc nhọn và gây "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                    } else if (randomPercent == 5) {
-                        gameScreen.gameTextView.setText("Bạn ra đòn chuẩn xác, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú khựng lại trong chốc lát.\n\n" + "Nhưng nó không từ bỏ, dùng đuôi của mình quét mạnh vào bạn, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                    } else if (randomPercent == 6) {
-                        gameScreen.gameTextView.setText("Cú tấn công mạnh mẽ của bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú rít lên đầy giận dữ, lùi lại một chút.\n\n" + "Tuy nhiên, nó lập tức dùng chân trước đạp mạnh vào bạn, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                    } else if (randomPercent == 7) {
-                        gameScreen.gameTextView.setText("Bạn tung đòn nhanh gọn, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú lảo đảo, nhưng vẫn giữ vững thế đứng.\n\n" + "Nó gầm lên đầy thịnh nộ, lao tới với cú cắn đầy uy lực, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                    } else if (randomPercent == 8) {
-                        gameScreen.gameTextView.setText("Bạn tấn công với tất cả sức mạnh, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú trông có vẻ bị thương nặng.\n\n" + "Thế nhưng, nó không chịu thua, nhảy lên và cào mạnh vào bạn, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                    } else if (randomPercent == 9) {
-                        gameScreen.gameTextView.setText("Với một đòn quyết đoán, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú lùi lại, vẻ mặt đầy đau đớn.\n\n" + "Không bỏ lỡ cơ hội, nó phản công dữ dội, dùng móng vuốt gây "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                    } else if (randomPercent == 10) {
-                        gameScreen.gameTextView.setText("Bạn ra tay mạnh mẽ, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú quằn quại, nhưng ánh mắt vẫn lộ vẻ hung tợn.\n\n" + "Ngay sau đó, nó dùng đầu húc mạnh vào bạn, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                    }
-                }
-            }
-        }
-
-        else {
-            random();
-            gameScreen.player.playerAttack = gameScreen.player.minAtk + random.nextInt(gameScreen.player.maxAtk);
-            gameScreen.monster.monsterHP -= gameScreen.player.playerAttack;
-
-            gameScreen.monster.monterAttack = gameScreen.monster.minAtk + random.nextInt(gameScreen.monster.maxAtk);
-            gameScreen.player.playerHp -= gameScreen.monster.monterAttack;
-
-            if (Objects.equals(gameScreen.story.race, "primate")){
-                if(randomPercent == 1) {
-                    gameScreen.gameTextView.setText("Với một cú ra tay đầy sức mạnh, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Đối thủ lùi lại, không thể chịu nổi sức mạnh của bạn.\n\n" + "Nhưng hắn nhanh chóng đáp trả và gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn phải bước lùi.");
-                } else if (randomPercent == 2) {
-                    gameScreen.gameTextView.setText("Bạn tấn công mạnh mẽ, gây ra "+gameScreen.player.playerAttack+" sát thương! Đối thủ loạng choạng vì cú đánh của bạn.\n\n" + "Hắn không để bạn dễ dàng thở phào, lập tức tung ra một đòn mạnh và gây "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                } else if (randomPercent == 3) {
-                    gameScreen.gameTextView.setText("Bạn ra đòn nhanh chóng, gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương mất thế nhưng vẫn đứng vững.\n\n" + "Đối thủ phản ứng ngay, gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn phải chống đỡ.");
-                } else if (randomPercent == 4) {
-                    gameScreen.gameTextView.setText("Cú đánh của bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương lùi lại, đôi mắt tràn đầy căm hận.\n\n" + "Hắn ngay lập tức tiến lên, phản công và gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn đau đớn.");
-                } else if (randomPercent == 5) {
-                    gameScreen.gameTextView.setText("Bạn gây ra "+gameScreen.player.playerAttack+" sát thương với cú tấn công chuẩn xác! Đối phương lùi lại một bước.\n\n" + "Nhưng hắn không bỏ cuộc, ngay lập tức lao tới và gây ra "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                } else if (randomPercent == 6) {
-                    gameScreen.gameTextView.setText("Với cú ra đòn mạnh mẽ, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Đối thủ bị đẩy lùi một khoảng.\n\n" + "Tuy nhiên, hắn không chần chừ, tấn công lại và gây ra "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                } else if (randomPercent == 7) {
-                    gameScreen.gameTextView.setText("Cú đánh của bạn trúng đích, gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương khựng lại, có vẻ không kịp phản ứng.\n\n" + "Nhưng hắn lập tức hồi phục và tấn công bạn với "+gameScreen.monster.monterAttack+" sát thương.");
-                } else if (randomPercent == 8) {
-                    gameScreen.gameTextView.setText("Bạn gây ra "+gameScreen.player.playerAttack+" sát thương mạnh mẽ, khiến đối phương phải lùi lại một chút.\n\n" + "Hắn không bỏ cuộc, lập tức đáp trả bằng một đòn hiểm hóc gây "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                } else if (randomPercent == 9) {
-                    gameScreen.gameTextView.setText("Với một đòn quyết đoán, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương chao đảo, nhưng vẫn đứng vững.\n\n" + "Hắn ngay lập tức phản công, gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn phải lùi lại.");
-                } else if (randomPercent == 10) {
-                    gameScreen.gameTextView.setText("Bạn ra đòn mạnh mẽ, gây ra "+gameScreen.player.playerAttack+" sát thương! Đối phương tỏ ra chật vật nhưng vẫn quyết liệt tiếp tục chiến đấu.\n\n" + "Đối thủ không dễ bị khuất phục, gây ra "+gameScreen.monster.monterAttack+" sát thương khiến bạn phải dừng lại một chút.");
-                }
-            } else if (Objects.equals(gameScreen.story.race, "animal")) {
-                if(randomPercent == 1) {
-                    gameScreen.gameTextView.setText("Với một cú ra đòn mạnh mẽ, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú gầm lên đầy giận dữ, lùi lại vài bước.\n\n" + "Tuy nhiên, nó lập tức lao lên, vung móng vuốt sắc nhọn và gây ra "+gameScreen.monster.monterAttack+" sát thương cho bạn.");
-                } else if (randomPercent == 2) {
-                    gameScreen.gameTextView.setText("Bạn tấn công chính xác, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú chao đảo, nhưng đôi mắt đỏ rực vẫn nhìn chằm chằm vào bạn.\n\n" + "Nó không chần chừ, lao tới với cú cắn sắc bén, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                } else if (randomPercent == 3) {
-                    gameScreen.gameTextView.setText("Cú đánh của bạn trúng đích, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú rít lên đau đớn, nhưng vẫn không chịu khuất phục.\n\n" + "Nó đáp trả ngay lập tức, vung móng vuốt về phía bạn và gây "+gameScreen.monster.monterAttack+" sát thương.");
-                } else if (randomPercent == 4) {
-                    gameScreen.gameTextView.setText("Với cú ra tay mạnh mẽ, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú lùi lại, gầm lên giận dữ.\n\n" + "Nó nhanh chóng phản công, nhảy tới với hàm răng sắc nhọn và gây "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                } else if (randomPercent == 5) {
-                    gameScreen.gameTextView.setText("Bạn ra đòn chuẩn xác, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú khựng lại trong chốc lát.\n\n" + "Nhưng nó không từ bỏ, dùng đuôi của mình quét mạnh vào bạn, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                } else if (randomPercent == 6) {
-                    gameScreen.gameTextView.setText("Cú tấn công mạnh mẽ của bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú rít lên đầy giận dữ, lùi lại một chút.\n\n" + "Tuy nhiên, nó lập tức dùng chân trước đạp mạnh vào bạn, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                } else if (randomPercent == 7) {
-                    gameScreen.gameTextView.setText("Bạn tung đòn nhanh gọn, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú lảo đảo, nhưng vẫn giữ vững thế đứng.\n\n" + "Nó gầm lên đầy thịnh nộ, lao tới với cú cắn đầy uy lực, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                } else if (randomPercent == 8) {
-                    gameScreen.gameTextView.setText("Bạn tấn công với tất cả sức mạnh, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú trông có vẻ bị thương nặng.\n\n" + "Thế nhưng, nó không chịu thua, nhảy lên và cào mạnh vào bạn, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                } else if (randomPercent == 9) {
-                    gameScreen.gameTextView.setText("Với một đòn quyết đoán, bạn gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú lùi lại, vẻ mặt đầy đau đớn.\n\n" + "Không bỏ lỡ cơ hội, nó phản công dữ dội, dùng móng vuốt gây "+gameScreen.monster.monterAttack+" sát thương vào bạn.");
-                } else if (randomPercent == 10) {
-                    gameScreen.gameTextView.setText("Bạn ra tay mạnh mẽ, gây ra "+gameScreen.player.playerAttack+" sát thương! Con thú quằn quại, nhưng ánh mắt vẫn lộ vẻ hung tợn.\n\n" + "Ngay sau đó, nó dùng đầu húc mạnh vào bạn, gây "+gameScreen.monster.monterAttack+" sát thương.");
-                }
-            }
-        }
-        random();
-
-        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
-        gameScreen.monsterHPTextView.setText("HP: " + gameScreen.monster.monsterHP);
-        if (gameScreen.player.playerHp < 20 * gameScreen.player.playerMaxHp / 100){
-            gameScreen.player.showToast("Sinh lực của bạn dưới 20%!!!",5000);
+            // Gỡ bỏ ánh sáng sau 600ms và ẩn View
+            new Handler().postDelayed(() -> {
+                gameScreenLayout.setVisibility(View.INVISIBLE); // Ẩn lại view sau khi flash
+                Log.d("FlashEffect", "Red flash disappeared");
+            }, 600); // Thời gian ẩn giống với thời gian hiệu ứng
         }
     }
+    public void attack() {
+        flashRedScreen();
+        random();
+        gameScreen.player.playerAttack = gameScreen.player.minAtk + random.nextInt(gameScreen.player.maxAtk);
+        gameScreen.monster.monsterHP -= gameScreen.player.playerAttack;
+
+        gameScreen.monster.monterAttack = gameScreen.monster.minAtk + random.nextInt(gameScreen.monster.maxAtk);
+        gameScreen.player.playerHp -= gameScreen.monster.monterAttack;
+
+        String attackMessage = generateAttackMessage(gameScreen.player.playerAttack, gameScreen.monster.monterAttack);
+
+        if (gameScreen.player.smallShield) {
+            if (randomPercent <= 3) {
+                gameScreen.gameTextView.setText("Cú đánh của bạn gây ra " + gameScreen.player.playerAttack + " sát thương! Đối thủ bị đẩy lùi một chút.\n\n" + "Hắn cố gắng tấn công lại, nhưng chiếc khiên của bạn đã đỡ trọn đòn đánh, giữ bạn an toàn.");
+            } else {
+                gameScreen.gameTextView.setText(attackMessage);
+            }
+        } else {
+            gameScreen.gameTextView.setText(attackMessage);
+        }
+        gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp);
+        gameScreen.monsterHPTextView.setText("HP: "+gameScreen.monster.monsterHP);
+    }
+
+    private String generateAttackMessage(int playerAttack, int monsterAttack) {
+        StringBuilder message = new StringBuilder();
+        message.append("Bạn gây ra ").append(playerAttack).append(" sát thương!\n");
+
+        if (Objects.equals(gameScreen.story.race, "primate")) {
+            message.append(generatePrimateMessage(monsterAttack));
+        } else if (Objects.equals(gameScreen.story.race, "animal")) {
+            message.append(generateAnimalMessage(monsterAttack));
+        }
+        return message.toString();
+    }
+
+    private String generatePrimateMessage(int monsterAttack) {
+        switch (randomPercent) {
+            case 1:
+                return "Đối thủ lùi lại, không thể chịu nổi sức mạnh của bạn.\n\nNhưng hắn nhanh chóng đáp trả và gây ra " + monsterAttack + " sát thương khiến bạn phải bước lùi.";
+            case 2:
+                return "Đối thủ loạng choạng vì cú đánh của bạn.\n\nHắn không để bạn dễ dàng thở phào, lập tức tung ra một đòn mạnh và gây " + monsterAttack + " sát thương vào bạn.";
+            case 3:
+                return "Đối phương mất thế nhưng vẫn đứng vững.\n\nĐối thủ phản ứng ngay, gây ra " + monsterAttack + " sát thương khiến bạn phải chống đỡ.";
+            case 4:
+                return "Đối phương lùi lại, đôi mắt tràn đầy căm hận.\n\nHắn ngay lập tức tiến lên, phản công và gây ra " + monsterAttack + " sát thương khiến bạn đau đớn.";
+            case 5:
+                return "Cú tấn công chuẩn xác! Đối phương lùi lại một bước.\n\nNhưng hắn không bỏ cuộc, ngay lập tức lao tới và gây ra " + monsterAttack + " sát thương vào bạn.";
+            case 6:
+                return "Cú ra đòn mạnh mẽ, đối thủ bị đẩy lùi một khoảng.\n\nTuy nhiên, hắn không chần chừ, tấn công lại và gây ra " + monsterAttack + " sát thương vào bạn.";
+            case 7:
+                return "Cú đánh của bạn trúng đích, đối phương khựng lại.\n\nNhưng hắn lập tức hồi phục và tấn công bạn với " + monsterAttack + " sát thương.";
+            case 8:
+                return "Bạn gây ra sát thương mạnh mẽ, khiến đối phương phải lùi lại một chút.\n\nHắn không bỏ cuộc, lập tức đáp trả bằng một đòn hiểm hóc gây " + monsterAttack + " sát thương vào bạn.";
+            case 9:
+                return "Với một đòn quyết đoán! Đối phương chao đảo, nhưng vẫn đứng vững.\n\nHắn ngay lập tức phản công, gây ra " + monsterAttack + " sát thương.";
+            case 10:
+                return "Ra tay mạnh mẽ! Đối phương tỏ ra chật vật.\n\nĐối thủ không dễ bị khuất phục, gây ra " + monsterAttack + " sát thương.";
+            default:
+                return "";
+        }
+    }
+
+    private String generateAnimalMessage(int monsterAttack) {
+        switch (randomPercent) {
+            case 1:
+                return "Con thú gầm lên đầy giận dữ, lùi lại vài bước.\n\nTuy nhiên, nó lập tức lao lên, vung móng vuốt sắc nhọn và gây ra " + monsterAttack + " sát thương cho bạn.";
+            case 2:
+                return "Con thú chao đảo, nhưng đôi mắt đỏ rực vẫn nhìn chằm chằm vào bạn.\n\nNó không chần chừ, lao tới với cú cắn sắc bén, gây " + monsterAttack + " sát thương.";
+            case 3:
+                return "Con thú rít lên đau đớn, nhưng vẫn không chịu khuất phục.\n\nNó đáp trả ngay lập tức, vung móng vuốt về phía bạn và gây " + monsterAttack + " sát thương.";
+            case 4:
+                return "Con thú lùi lại, gầm lên giận dữ.\n\nNó nhanh chóng phản công, nhảy tới với hàm răng sắc nhọn và gây " + monsterAttack + " sát thương vào bạn.";
+            case 5:
+                return "Con thú khựng lại trong chốc lát.\n\nNhưng nó không từ bỏ, dùng đuôi của mình quét mạnh vào bạn, gây " + monsterAttack + " sát thương.";
+            case 6:
+                return "Con thú rít lên đầy giận dữ, lùi lại một chút.\n\nTuy nhiên, nó lập tức dùng chân trước đạp mạnh vào bạn, gây " + monsterAttack + " sát thương.";
+            case 7:
+                return "Con thú lảo đảo, nhưng vẫn giữ vững thế đứng.\n\nNó gầm lên đầy thịnh nộ, lao tới với cú cắn đầy uy lực, gây " + monsterAttack + " sát thương.";
+            case 8:
+                return "Bạn tấn công với tất cả sức mạnh, Con thú trông có vẻ bị thương nặng.\n\nThế nhưng, nó không chịu thua, nhảy lên và cào mạnh vào bạn, gây " + monsterAttack + " sát thương.";
+            case 9:
+                return "Với một đòn quyết đoán! Con thú lùi lại, vẻ mặt đầy đau đớn.\n\nKhông bỏ lỡ cơ hội, nó phản công dữ dội, dùng móng vuốt gây " + monsterAttack + " sát thương vào bạn.";
+            case 10:
+                return "Bạn ra tay mạnh mẽ, gây ra! Con thú quằn quại, nhưng ánh mắt vẫn lộ vẻ hung tợn.\n\nNgay sau đó, nó dùng đầu húc mạnh vào bạn, gây " + monsterAttack + " sát thương.";
+            default:
+                return "";
+        }
+    }
+
 
     public void run(){
         randomHP = 10 + random.nextInt(11);

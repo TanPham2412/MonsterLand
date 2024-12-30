@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -95,15 +96,47 @@ public class GameScreen extends AppCompatActivity {
     }
 
     public void button1(View view) {
+        // Giảm độ mờ của nút và vô hiệu hóa nút
+        button1.setAlpha(0.5f); // Giảm độ mờ xuống 50%
+        button1.setEnabled(false); // Vô hiệu hóa nút, không thể nhấn được
+
+        // Xử lý hành động của nút (ví dụ: chọn vị trí tiếp theo trong câu chuyện)
         story.selectPosition(story.nextPosition1);
+
+        // Đặt độ trễ 0.1 giây rồi phục hồi độ mờ và bật lại khả năng nhấn của nút
+        new Handler().postDelayed(() -> {
+            button1.setAlpha(1f); // Phục hồi độ mờ về 100%
+            button1.setEnabled(true); // Bật lại khả năng nhấn của nút
+        }, 150); // 100ms = 0.1 giây
     }
 
     public void button2(View view) {
+        // Giảm độ mờ của nút và vô hiệu hóa nút5
+        button2.setEnabled(false); // Vô hiệu hóa nút, không thể nhấn được
+
+        // Xử lý hành động của nút (ví dụ: chọn vị trí tiếp theo trong câu chuyện)
         story.selectPosition(story.nextPosition2);
+
+        // Đặt độ trễ 0.1 giây rồi phục hồi độ mờ và bật lại khả năng nhấn của nút
+        new Handler().postDelayed(() -> {
+            button2.setAlpha(1f); // Phục hồi độ mờ về 100%
+            button2.setEnabled(true); // Bật lại khả năng nhấn của nút
+        }, 150); // 100ms = 0.1 giây
     }
 
     public void button3(View view) {
+        // Giảm độ mờ của nút và vô hiệu hóa nút
+        button3.setAlpha(0.5f); // Giảm độ mờ xuống 50%
+        button3.setEnabled(false); // Vô hiệu hóa nút, không thể nhấn được
+
+        // Xử lý hành động của nút (ví dụ: chọn vị trí tiếp theo trong câu chuyện)
         story.selectPosition(story.nextPosition3);
+
+        // Đặt độ trễ 0.1 giây rồi phục hồi độ mờ và bật lại khả năng nhấn của nút
+        new Handler().postDelayed(() -> {
+            button3.setAlpha(1f); // Phục hồi độ mờ về 100%
+            button3.setEnabled(true); // Bật lại khả năng nhấn của nút
+        }, 150); // 100ms = 0.1 giây
     }
 
     public void goTitleScreen() {
