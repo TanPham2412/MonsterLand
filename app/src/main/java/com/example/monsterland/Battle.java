@@ -125,6 +125,7 @@ public class Battle {
     }
 
     public void run() {
+        flashRedScreen();
         randomHP = 10 + random.nextInt(11);
         hp = gameScreen.player.playerMaxHp * randomHP / 100;
         gameScreen.player.playerHp = Math.max(gameScreen.player.playerHp - hp, 1);

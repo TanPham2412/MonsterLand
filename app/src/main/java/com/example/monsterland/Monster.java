@@ -3,91 +3,56 @@ package com.example.monsterland;
 import android.annotation.SuppressLint;
 
 @SuppressLint("SetTextI18n")
-
-
 public class Monster {
     GameScreen gameScreen;
     public int monsterHP, monterAttack, minAtk, maxAtk;
-    public Monster(GameScreen gameScreen){
+
+    public Monster(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
     }
-    public void bandit(){
-        monsterHP = 50;
-        minAtk = 2;
-        maxAtk = 3;
+
+    // Hàm chung để cập nhật thông tin quái vật
+    private void setMonsterStats(int hp, int minAtk, int maxAtk, String race) {
+        this.monsterHP = hp;
+        this.minAtk = minAtk;
+        this.maxAtk = maxAtk;
         gameScreen.player.playerUseArmor();
-        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
+        // Hiển thị attack range đúng
+        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - " + (minAtk + maxAtk - 1));
         gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.story.race = "primate";
+        gameScreen.story.race = race;
     }
 
-    public void aMystic(){
-        monsterHP = 120;
-        minAtk = 5;
-        maxAtk = 15;
-        gameScreen.monsterAttackTextView.setText("Atk: ???");
-        gameScreen.monsterHPTextView.setText("Hp: ???");
-        gameScreen.player.playerUseArmor();
-        gameScreen.story.race = "primate";
+    public void bandit() {
+        setMonsterStats(50, 2, 3, "primate");
     }
 
-    public void gateKeeper(){
-        monsterHP = 55;
-        minAtk = 2;
-        maxAtk = 4;
-        gameScreen.player.playerUseArmor();
-        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
-        gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.story.race = "primate";
+    public void aMystic() {
+        setMonsterStats(120, 5, 15, "primate");
+        gameScreen.monsterAttackTextView.setText("Atk: ???"); // Nếu bạn muốn hiển thị không xác định
     }
 
-    public void knight(){
-        monsterHP = 80;
-        minAtk = 5;
-        maxAtk = 5;
-        gameScreen.player.playerUseArmor();
-        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
-        gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.story.race = "primate";
+    public void gateKeeper() {
+        setMonsterStats(55, 2, 4, "primate");
     }
 
-    public void goblinChild(){
-        monsterHP = 20;
-        minAtk = 2;
-        maxAtk = 2;
-        gameScreen.player.playerUseArmor();
-        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
-        gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.story.race = "primate";
+    public void knight() {
+        setMonsterStats(80, 5, 5, "primate");
     }
 
-    public void wolf(){
-        monsterHP = 80;
-        minAtk = 6;
-        maxAtk = 5;
-        gameScreen.player.playerUseArmor();
-        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
-        gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.story.race = "animal";
+    public void goblinChild() {
+        setMonsterStats(20, 2, 2, "primate");
     }
 
-    public void elderGoblin(){
-        monsterHP = 100;
-        minAtk = 6;
-        maxAtk = 6;
-        gameScreen.player.playerUseArmor();
-        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
-        gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.story.race = "primate";
+    public void wolf() {
+        setMonsterStats(80, 6, 5, "animal");
     }
 
-    public void kingGoblin(){
-        monsterHP = 150;
-        minAtk = 10;
-        maxAtk = 6;
-        gameScreen.player.playerUseArmor();
-        gameScreen.monsterAttackTextView.setText("Atk: " + minAtk + " - "+ (minAtk + maxAtk - 1));
-        gameScreen.monsterHPTextView.setText("Hp: " + monsterHP);
-        gameScreen.story.race = "primate";
+    public void elderGoblin() {
+        setMonsterStats(100, 6, 6, "primate");
+    }
+
+    public void kingGoblin() {
+        setMonsterStats(150, 10, 6, "primate");
     }
 }
