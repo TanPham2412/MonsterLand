@@ -1,13 +1,9 @@
-
 package com.example.monsterland;
-
 import android.annotation.SuppressLint;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 @SuppressLint("SetTextI18n")
-
 public class StoryCastle {
     GameScreen gameScreen;
     boolean knightDead = false;
