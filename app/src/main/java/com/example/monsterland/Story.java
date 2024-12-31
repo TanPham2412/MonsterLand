@@ -20,6 +20,22 @@ public class Story {
         gameScreen.button3.setVisibility(View.VISIBLE);
     }
 
+    public void invisible2Button(){
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+
+    public void invisible1Button(){
+        gameScreen.story.nextPosition3 = "";
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+    }
+    public void resetMonsterText(){
+        gameScreen.monsterAttackTextView.setText("");
+        gameScreen.monsterHPTextView.setText("");
+    }
+
     public void selectPosition(String position) {
         switch (position) {
             case "opening1":
