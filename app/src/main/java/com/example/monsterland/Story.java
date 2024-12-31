@@ -36,6 +36,12 @@ public class Story {
         gameScreen.monsterHPTextView.setText("");
     }
 
+    public void nextStory(){
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+    }
+
     public void selectPosition(String position) {
         switch (position) {
             case "opening1":
