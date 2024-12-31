@@ -53,6 +53,6 @@ public class Monster {
     }
 
     public void kingGoblin() {
-        setMonsterStats(150, 10, 6, "primate");
+        setMonsterStats(180, 12, 9, "primate");
     }
 }

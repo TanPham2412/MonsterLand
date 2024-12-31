@@ -153,6 +153,7 @@ public class Battle {
         } else {
             damage = 0;
         }
+        gameScreen.storyTenebris.boneDart--;
         gameScreen.monster.monsterHP -= damage;
         gameScreen.monsterHPTextView.setText("HP: " + gameScreen.monster.monsterHP);
         gameScreen.gameTextView.setText("Bạn phóng chiếc phi tiêu vào " + getTargetBodyPart() + ". Bạn gây ra " + damage + " sát thương.");
