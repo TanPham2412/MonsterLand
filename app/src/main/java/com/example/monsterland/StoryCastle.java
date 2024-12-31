@@ -3,6 +3,8 @@ package com.example.monsterland;
 
 import android.annotation.SuppressLint;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 @SuppressLint("SetTextI18n")
 
@@ -12,8 +14,6 @@ public class StoryCastle {
     public StoryCastle(GameScreen gameScreen){
         this.gameScreen = gameScreen;
     }
-
-
     public void opening1(){
         gameScreen.gameImageView.setImageResource(R.drawable.city);
         gameScreen.gameTextView.setText("Bạn sống trong thành phố Umbra, nơi một lời nguyền cổ xưa đã đè nặng lên đời sống của người dân, khiến nhiều người mắc phải các biến chứng kỳ lạ. Những cơn gió mang theo mùi hương tẩm thuốc và bóng tối vương vấn trong không gian.");
@@ -29,7 +29,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "opening";
         gameScreen.story.resetMonsterText();
     }
-
     public void opening(){
         gameScreen.gameImageView.setImageResource(R.drawable.city);
         gameScreen.gameTextView.setText("Bạn sống trong thành phố Umbra, nơi một lời nguyền cổ xưa đã đè nặng lên đời sống của người dân, khiến nhiều người mắc phải các biến chứng kỳ lạ. Những cơn gió mang theo mùi hương tẩm thuốc và bóng tối vương vấn trong không gian.");
@@ -43,7 +42,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "opening";
         gameScreen.story.resetMonsterText();
     }
-
     public void opening2(){
         gameScreen.gameImageView.setImageResource(R.drawable.scar);
         gameScreen.gameTextView.setText("Bạn nhận ra rằng đó là dấu vết của một con quái vật đã chết, nhưng lời nguyền vẫn còn tồn tại.\n\n Để giải thoát khỏi số phận này, bạn phải tìm Mira, một thầy thuốc nổi tiếng ẩn cư ở ngoài rìa thành phố, nhờ giúp đỡ.");
@@ -56,7 +54,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "opening2";
         gameScreen.story.resetMonsterText();
     }
-
     public void meetCat(){
         gameScreen.gameImageView.setImageResource(R.drawable.cat);
         gameScreen.gameTextView.setText("Bạn cần rời khỏi thành phố càng sớm càng tốt để gặp Mira mà không bị phát hiện, nếu không sẽ gặp rắc rối lớn. Khi đi qua một con hẻm, bạn nhìn thấy một chú mèo đang bới rác, và một vật gì đó lấp lánh đang tỏa sáng dưới lớp rác.\n" + "\n" + "Liệu bạn có dừng lại kiểm tra món đồ này hay tiếp tục bước đi, giữ tốc độ và sự cẩn trọng?");
@@ -117,7 +114,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "useKnife1";
         gameScreen.story.resetMonsterText();
     }
-
     public void notUseKnife(){
         gameScreen.gameImageView.setImageResource(R.drawable.go);
         gameScreen.gameTextView.setText("Bạn liếc qua món đồ, nhưng quyết định không dừng lại. Cảm giác khẩn trương thôi thúc bạn tiếp tục bước đi, hướng về phía trước, nơi những nguy hiểm vẫn đang chờ đón.");
@@ -183,7 +179,6 @@ public class StoryCastle {
 
         gameScreen.story.savePosition = "sneakAttack";
     }
-
     public void attack(){
         if (Objects.equals(gameScreen.story.nextPosition, "banditKnife")){
             gameScreen.gameImageView.setImageResource(R.drawable.bandit);
@@ -198,7 +193,6 @@ public class StoryCastle {
         } else if(Objects.equals(gameScreen.story.nextPosition, "killedWolf")){
             gameScreen.gameImageView.setImageResource(R.drawable.wolfhead);
         }
-
         gameScreen.battle.attack();
         if(gameScreen.player.playerHp <=0){
 
@@ -240,20 +234,17 @@ public class StoryCastle {
             gameScreen.story.savePosition = "waitAttack";
         }
     }
-
-    public void setImage(){
-        if (Objects.equals(gameScreen.story.nextPosition, "banditKnife")){
-            gameScreen.gameImageView.setImageResource(R.drawable.bandit);
-        } else if(Objects.equals(gameScreen.story.nextPosition, "outsideCastle")){
-            gameScreen.gameImageView.setImageResource(R.drawable.hood);
-        } else if(Objects.equals(gameScreen.story.nextPosition, "leatherArmor")){
-            gameScreen.gameImageView.setImageResource(R.drawable.gatekeeper);
-        } else if(Objects.equals(gameScreen.story.nextPosition, "knightDead")){
-            gameScreen.gameImageView.setImageResource(R.drawable.knight);
-        } else if(Objects.equals(gameScreen.story.nextPosition, "killedGoblin")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblin);
-        } else if(Objects.equals(gameScreen.story.nextPosition, "killedWolf")){
-            gameScreen.gameImageView.setImageResource(R.drawable.wolfhead);
+    public void setImage() {
+        Map<String, Integer> imageMap = new HashMap<>();
+        imageMap.put("banditKnife", R.drawable.bandit);
+        imageMap.put("outsideCastle", R.drawable.hood);
+        imageMap.put("leatherArmor", R.drawable.gatekeeper);
+        imageMap.put("knightDead", R.drawable.knight);
+        imageMap.put("killedGoblin", R.drawable.goblin);
+        imageMap.put("killedWolf", R.drawable.wolfhead);
+        Integer imageResource = imageMap.get(gameScreen.story.nextPosition);
+        if (imageResource != null) {
+            gameScreen.gameImageView.setImageResource(imageResource);
         }
     }
     public void winAttack(){
@@ -267,7 +258,6 @@ public class StoryCastle {
         gameScreen.story.resetMonsterText();
         gameScreen.story.savePosition = "winAttack";
     }
-
     public void deadAttack(){
         setImage();
         gameScreen.button1.setText("Bạn đã bị đánh bại!!!");
@@ -280,7 +270,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "deadAttack";
         gameScreen.story.resetMonsterText();
     }
-
     public void waitAttack(){
         setImage();
 
@@ -294,12 +283,9 @@ public class StoryCastle {
 
         gameScreen.story.savePosition = "waitAttack";
     }
-
     public void run(){
         gameScreen.battle.random();
         if (gameScreen.battle.randomPercent <= 3){
-            gameScreen.monsterAttackTextView.setText("");
-            gameScreen.monsterHPTextView.setText("");
             gameScreen.gameImageView.setImageResource(R.drawable.waysign);
             gameScreen.gameTextView.setText("Bạn đã quay lại trước con hẻm, nơi vẫn còn những dấu vết đẫm máu. Bầu không khí tĩnh lặng, nhưng sự nguy hiểm vẫn còn rình rập.\n" + "\n" + "Bạn sẽ vào hẻm một lần nữa để đối mặt với những kẻ du côn, hay bạn sẽ tìm một con đường khác để tránh xa mối nguy này?");
 
@@ -328,7 +314,6 @@ public class StoryCastle {
         }
         gameScreen.story.savePosition = "run";
     }
-
     public void runBeforeAttack(){
         gameScreen.story.nextPosition = "banditKnife";
         gameScreen.battle.random();
@@ -361,7 +346,6 @@ public class StoryCastle {
         }
         gameScreen.story.savePosition = "runBeforeAttack";
     }
-
     public void banditKnife(){
         gameScreen.gameImageView.setImageResource(R.drawable.banditknife);
         gameScreen.gameTextView.setText("Sau một cuộc giao đấu căng thẳng, bạn cuối cùng cũng tiêu diệt được tên côn đồ. Hắn gục xuống, thở dốc và không còn khả năng phản kháng. Khi kiểm tra thi thể của hắn, bạn tìm thấy một con dao sắc bén được giấu kỹ trong áo hắn. Con dao có vẻ là một công cụ hữu ích trong hành trình tiếp theo của bạn, nên bạn quyết định cầm lấy nó.");
@@ -377,7 +361,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "banditKnife1";
         gameScreen.story.resetMonsterText();
     }
-
     public void banditKnife1(){
         gameScreen.gameImageView.setImageResource(R.drawable.banditknife);
         gameScreen.gameTextView.setText("Sau một cuộc giao đấu căng thẳng, bạn cuối cùng cũng tiêu diệt được tên côn đồ. Hắn gục xuống, thở dốc và không còn khả năng phản kháng. Khi kiểm tra thi thể của hắn, bạn tìm thấy một con dao sắc bén được giấu kỹ trong áo hắn. Con dao có vẻ là một công cụ hữu ích trong hành trình tiếp theo của bạn, nên bạn quyết định cầm lấy nó.");
@@ -392,7 +375,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "banditKnife1";
         gameScreen.story.resetMonsterText();
     }
-
     public void dead(){
         gameScreen.gameImageView.setImageResource(R.drawable.dead);
         gameScreen.gameTextView.setText("Bạn đã chết! Kẻ thù tấn công quá mạnh mẽ và bạn không kịp phản ứng. Cái kết đột ngột này đánh dấu sự kết thúc của một hành trình, nhưng cũng là cơ hội để bạn học hỏi và chuẩn bị cho những cuộc phiêu lưu tiếp theo!\n\n GAME OVER!!!");
@@ -405,7 +387,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "dead";
         gameScreen.story.resetMonsterText();
     }
-
     public void intoAlley1(){
         gameScreen.story.nextPosition = "outsideCastle";
         gameScreen.gameImageView.setImageResource(R.drawable.hood);
@@ -425,7 +406,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "intoAlley1";
         gameScreen.story.resetMonsterText();
     }
-
     public void outsideCastle(){
         gameScreen.gameImageView.setImageResource(R.drawable.castle);
         gameScreen.gameTextView.setText("Bạn đã ra ngoài thành, cảm giác tự do và an toàn tạm thời bao phủ lấy bạn. Nhưng ngay lập tức, sự lo lắng về lời nguyền lại ùa về. Bạn biết mình cần phải gặp Mira càng sớm càng tốt để tìm cách xóa bỏ nó. Thời gian không còn nhiều, và mỗi phút trôi qua đều quan trọng.");
@@ -437,7 +417,6 @@ public class StoryCastle {
 
         gameScreen.story.resetMonsterText();
         gameScreen.story.savePosition = "outsideCastle";
-
     }
     public void keepGoing(){
         gameScreen.story.nextPositionTwo = "run";
@@ -458,7 +437,6 @@ public class StoryCastle {
 
         gameScreen.story.savePosition = "keepGoing";
     }
-
     public void checkAtGate(){
         gameScreen.battle.random();
         gameScreen.gameImageView.setImageResource(R.drawable.gatekeeper);
@@ -489,7 +467,6 @@ public class StoryCastle {
         }
         gameScreen.story.savePosition = "checkAtGate";
     }
-
     public void leatherArmor(){
         gameScreen.gameImageView.setImageResource(R.drawable.leatherarmor);
         gameScreen.gameTextView.setText("Chiến thắng kẻ địch, bạn nhận một bộ giáp da. Bộ giáp nhẹ nhưng đủ chắc chắn để bảo vệ bạn khỏi những đòn tấn công cơ bản.\n" + "\n" + "Bạn có muốn trang bị giáp da ngay bây giờ không?");
@@ -508,7 +485,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "leatherArmor";
         gameScreen.story.resetMonsterText();
     }
-
     public void useLeatherArmor(){
         gameScreen.gameImageView.setImageResource(R.drawable.leatherarmor);
         gameScreen.gameTextView.setText("Bạn trang bị bộ giáp da thành công, cảm nhận lớp bảo vệ mới che chắn cơ thể. Với nó, sát thương bạn nhận vào sẽ giảm đi một phần, tăng thêm cơ hội sống sót.\n" + "\n" + "Hít một hơi thật sâu, bạn tiếp tục tiến bước vào con đường phía trước, nơi hiểm nguy vẫn đang rình rập");
@@ -530,7 +506,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "useLeatherArmor1";
         gameScreen.story.resetMonsterText();
     }
-
     public void useLeatherArmor1(){
         gameScreen.gameImageView.setImageResource(R.drawable.leatherarmor);
         gameScreen.gameTextView.setText("Bạn trang bị bộ giáp da thành công, cảm nhận lớp bảo vệ mới che chắn cơ thể. Với nó, sát thương bạn nhận vào sẽ giảm đi một phần, tăng thêm cơ hội sống sót.\n" + "\n" + "Hít một hơi thật sâu, bạn tiếp tục tiến bước vào con đường phía trước, nơi hiểm nguy vẫn đang rình rập");
@@ -556,7 +531,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "outsideCastle";
         gameScreen.story.resetMonsterText();
     }
-
     public void meetMira(){
         gameScreen.gameImageView.setImageResource(R.drawable.mira);
         gameScreen.gameTextView.setText("Bạn đến gặp Mira\n\nMira nhìn bạn một lúc lâu, đôi mắt có chút lo lắng. Cô hỏi:\n\n'Ngươi có thể nói cho ta rõ hơn về vết thương này không? Nó là vết thương cũ hay là dấu hiệu của sự nguy hiểm? Nếu cần ta sẵn sàng giúp, nhưng ta cần phải biết sự thật.'");
@@ -570,10 +544,10 @@ public class StoryCastle {
         gameScreen.story.nextPosition1 = "tellTruth";
         gameScreen.story.nextPosition2 = "lie";
         gameScreen.story.nextPosition3 = "refuseAnswer";
+
         gameScreen.story.savePosition = "meetMira";
         gameScreen.story.resetMonsterText();
     }
-
     public void tellTruth(){
         gameScreen.gameImageView.setImageResource(R.drawable.postion);
         gameScreen.gameTextView.setText("Mira nhìn bạn, lo lắng nhưng kiên quyết. Cô đồng ý giúp, giải thích rằng để phá vỡ lời nguyền, bạn phải tìm đủ ba mảnh vỡ ở Rừng Đen - Tenebris, Hồ Bạc - Argentis và Thành Trì Tháp Đen - The Black Tower\n\n Mira đưa bạn một lọ thuốc đặc biệt để hỗ trợ bạn.");
@@ -587,7 +561,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "tellTruth";
         gameScreen.story.resetMonsterText();
     }
-
     public void lie(){
         gameScreen.gameImageView.setImageResource(R.drawable.think);
         gameScreen.gameTextView.setText("Mira thoáng nghi ngờ nhưng vẫn quyết định giúp bạn. Cô đưa bạn thuốc giảm đau và chỉ dẫn cách vượt qua thử thách đầu tiên, dù ánh mắt vẫn lộ vẻ lo âu. Tuy nhiên, mối quan hệ giữa bạn và Mira sẽ không hoàn toàn gắn kết nếu sự thật chưa được thú nhận.");
@@ -597,7 +570,6 @@ public class StoryCastle {
             gameScreen.player.playerHp = gameScreen.player.playerMaxHp;
             gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
         }
-
         gameScreen.story.nextStory();
 
         gameScreen.story.nextPosition1 = "getOutMiraHome";
@@ -606,7 +578,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "lie";
         gameScreen.story.resetMonsterText();
     }
-
     public void refuseAnswer(){
         gameScreen.gameImageView.setImageResource(R.drawable.look);
         gameScreen.gameTextView.setText("Mira nhìn bạn với ánh mắt sợ hãi và lập tức ra lệnh rời đi. Cô tin rằng dấu ấn này sẽ mang thảm họa không chỉ cho bạn mà còn cho toàn thành phố Umbra.\n\n Cuộc hành trình của bạn đã kết thúc!\n\n GAME OVER!!!");
@@ -619,7 +590,6 @@ public class StoryCastle {
         gameScreen.story.savePosition = "refuseAnswer";
         gameScreen.story.resetMonsterText();
     }
-
     public void getOutMiraHome(){
         gameScreen.story.nextPositionTwo = "woodenSign";
         gameScreen.story.nextPosition = "knightDead";
@@ -639,7 +609,6 @@ public class StoryCastle {
 
         gameScreen.story.savePosition = "getOutMiraHome";
     }
-
     public void knightDead(){
         gameScreen.gameImageView.setImageResource(R.drawable.gladius);
         gameScreen.gameTextView.setText("Bạn nhặt thanh kiếm từ tay tên hiệp sĩ vừa gục ngã. Lưỡi kiếm gỉ sét, nhưng dường như nó tỏa ra một luồng sức mạnh bí ẩn, hòa quyện với ý chí của bạn. Một cảm giác dâng trào lan tỏa—sức mạnh của bạn đã tăng lên!");
@@ -655,7 +624,6 @@ public class StoryCastle {
         knightDead = true;
         gameScreen.story.savePosition = "knightDead1";
     }
-
     public void knightDead1(){
         gameScreen.gameImageView.setImageResource(R.drawable.gladius);
         gameScreen.gameTextView.setText("Bạn nhặt thanh kiếm từ tay tên hiệp sĩ vừa gục ngã. Lưỡi kiếm gỉ sét, nhưng dường như nó tỏa ra một luồng sức mạnh bí ẩn, hòa quyện với ý chí của bạn. Một cảm giác dâng trào lan tỏa—sức mạnh của bạn đã tăng lên!");
@@ -669,7 +637,6 @@ public class StoryCastle {
         knightDead = true;
         gameScreen.story.savePosition = "knightDead1";
     }
-
     public void woodenSign(){
         gameScreen.gameImageView.setImageResource(R.drawable.sign);
         gameScreen.gameTextView.setText("Theo lời của Mira, bạn đã đến trước tấm biển gỗ cũ kỹ, trên đó khắc hai con đường: một lối dẫn vào Rừng Đen - Tenebris, nơi bóng tối và hiểm nguy rình rập, và lối kia hướng về Hồ Bạc - Argentis, ánh sáng phản chiếu vẻ huyền bí đầy mê hoặc.\n" + "\n" + "Bạn sẽ chọn tiến vào đâu trước?");
