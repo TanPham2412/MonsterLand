@@ -76,7 +76,7 @@ public class StoryTenebris {
 
         gameScreen.story.showAllButton();
 
-        gameScreen.button1.setText("Tiến lại gần và xin miếng thịt");
+        gameScreen.button1.setText("Tiến lại gần xin miếng thịt");
         gameScreen.button2.setText("Cướp lấy miếng thịt");
         gameScreen.button3.setText("Rời khỏi đó mà không làm gì");
 
@@ -492,18 +492,16 @@ public class StoryTenebris {
         gameScreen.story.savePosition = "backToVillage";
     }
     public void helpGoblin(){
-        gameScreen.gameImageView.setImageResource(R.drawable.herbsbundle);
+        gameScreen.gameImageView.setImageResource(R.drawable.roundshield);
         if(!repayGoblin) {
             gameScreen.gameTextView.setText("Bạn đưa toàn bộ thảo dược cho goblin, ánh mắt nó sáng lên đầy cảm kích. Nó nhận lấy bằng đôi tay run run, miệng lẩm bẩm cảm ơn bằng thứ tiếng khó hiểu.\n" + "\n" + "Để đáp lại, goblin trao cho bạn một chiếc khiên nhỏ, khẽ nói: \"Thứ này sẽ bảo vệ bạn.\"\n" + "\n" + "Nhìn món quà trên tay, bạn nhận ra rằng lòng tốt đôi khi là vũ khí mạnh nhất trong thế giới đầy hiểm nguy này.");
             gameScreen.playerHPTextView.setText("HP: " + gameScreen.player.playerHp + "/" + gameScreen.player.playerMaxHp);
-
             gameScreen.story.showAllButton();
 
         }else {
-            gameScreen.gameTextView.setText("Bạn quyết định chia sẻ một nửa thảo dược của mình với goblin. Đôi mắt nó sáng lên, đầy bất ngờ và cảm kích. Goblin cúi đầu, đưa tay nhận lấy phần thảo dược một cách kính cẩn.\n\n" + "Để đáp lại, goblin trao cho bạn một chiếc khiên nhỏ. 'Cảm ơn, bạn thật sự tốt bụng,' goblin lí nhí nói bằng thứ tiếng khàn khàn của nó.");            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
-
-            gameScreen.player.smallShield = true;
-
+            gameScreen.gameTextView.setText("Bạn quyết định chia sẻ một nửa thảo dược của mình với goblin. Đôi mắt nó sáng lên, đầy bất ngờ và cảm kích. Goblin cúi đầu, đưa tay nhận lấy phần thảo dược một cách kính cẩn.\n\n" + "Để đáp lại, goblin trao cho bạn một chiếc khiên nhỏ. 'Cảm ơn, bạn thật sự tốt bụng,' goblin lí nhí nói bằng thứ tiếng khàn khàn của nó.");
+            gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
+            gameScreen.player.shield = true;
         }
         gameScreen.button1.setText(">");
         gameScreen.button2.setText("");
@@ -587,6 +585,27 @@ public class StoryTenebris {
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         gameScreen.story.savePosition = "kingGoblin";
+    }
+
+    public void kingGoblinDrop(){
+        gameScreen.gameImageView.setImageResource(R.drawable.roundshield);
+        gameScreen.gameTextView.setText("Sau khi hạ gục kẻ thù, bạn giật lấy chiếc khiên kiên cố từ tay hắn. Lớp kim loại sứt mẻ nhưng vẫn toát lên vẻ vững chắc, như đã từng cản phá vô số đòn tấn công. Giờ đây, nó sẽ trở thành lá chắn bảo vệ bạn trước những hiểm nguy phía trước");
+        gameScreen.playerHPTextView.setText("HP: " + gameScreen.player.playerHp + "/" + gameScreen.player.playerMaxHp);
+
+        gameScreen.player.shield = true;
+
+        gameScreen.button1.setText(">");
+        gameScreen.button2.setText("");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.nextPosition1 = "";
+        gameScreen.story.nextPosition2 = "";
+        gameScreen.story.nextPosition3 = "";
+
+        gameScreen.button2.setVisibility(View.INVISIBLE);
+        gameScreen.button3.setVisibility(View.INVISIBLE);
+
+        gameScreen.story.savePosition = "kingGoblinDrop";
     }
 
     public void boneDart(){

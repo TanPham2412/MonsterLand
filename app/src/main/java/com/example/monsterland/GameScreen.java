@@ -157,9 +157,10 @@ public class GameScreen extends AppCompatActivity {
         editor.putInt("expNeed", player.expNeed);
         editor.putBoolean("leatherArmor", player.leatherArmor);
         editor.putBoolean("specialPotion", player.specialPotion);
-        editor.putBoolean("smallShield", player.smallShield);
+        editor.putBoolean("shield", player.shield);
 
         editor.putBoolean("knightDead", storyCastle.knightDead);
+        editor.putBoolean("banditDead", storyCastle.banditDead);
 
         editor.putBoolean("tenebris", storyTenebris.tenebris);
         editor.putBoolean("repayGoblin", storyTenebris.repayGoblin);
@@ -198,7 +199,7 @@ public class GameScreen extends AppCompatActivity {
 
             player.leatherArmor = sharedPreferences.getBoolean("leatherArmor", player.leatherArmor);
             player.specialPotion = sharedPreferences.getBoolean("specialPotion", player.specialPotion);
-            player.specialPotion = sharedPreferences.getBoolean("smallShield", player.smallShield);
+            player.specialPotion = sharedPreferences.getBoolean("shield", player.shield);
             story.savePosition = savedPosition;
 
             playerHPTextView.setText("HP: " + player.playerHp + "/" + player.playerMaxHp);
@@ -207,6 +208,7 @@ public class GameScreen extends AppCompatActivity {
             playerAttackTextView.setText("Atk: " + player.minAtk + " - " + (player.minAtk + player.maxAtk - 1));
 
             storyCastle.knightDead = sharedPreferences.getBoolean("knightDead", storyCastle.knightDead);
+            storyCastle.banditDead = sharedPreferences.getBoolean("banditDead", storyCastle.banditDead);
 
             storyTenebris.repayGoblin = sharedPreferences.getBoolean("repayGoblin", storyTenebris.repayGoblin);
             storyTenebris.goblinCurse = sharedPreferences.getBoolean("goblinCurse", storyTenebris.goblinCurse);

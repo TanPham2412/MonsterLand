@@ -20,7 +20,7 @@ public class Player {
     public int playerMaxHp = 60;
     public String playerWeapon;
     boolean leatherArmor = false;
-    boolean smallShield = false;
+    boolean shield = false;
     boolean specialPotion = false;
     Random random = new Random();
 
@@ -129,6 +129,16 @@ public class Player {
         gameScreen.playerWeaponTextView.setText("Vũ khí: " + playerWeapon);
     }
 
+    public void playerUseArmor() {
+        if (leatherArmor) {
+            playerUseLeaderArmor();
+        }
+    }
+
+    public void playerUseShield(){
+        playerUseRoundShield();
+    }
+
     public void playerUseStick() {
         updateWeapon(2, 2, "Gậy gỗ");
     }
@@ -145,14 +155,16 @@ public class Player {
         updateWeapon(6, 4, "Kiếm sắt");
     }
 
-    public void playerUseArmor() {
-        if (leatherArmor) {
-            playerUseLeaderArmor();
-        }
-    }
-
     public void playerUseLeaderArmor() {
         gameScreen.monster.minAtk -= 1;
         gameScreen.monster.maxAtk -= 1;
+    }
+
+    public void playerUseRoundShield(){
+        gameScreen.battle.random();
+        if(gameScreen.battle.randomPercent <= 2){
+            gameScreen.monster.monterAttack = 0;
+            gameScreen.gameTextView.setText("Cú đánh của bạn gây ra " + gameScreen.player.playerAttack + " sát thương! Đối thủ bị đẩy lùi một chút.\n\n" + "Hắn cố gắng tấn công lại, nhưng chiếc khiên của bạn đã đỡ trọn đòn đánh, giữ bạn an toàn.");
+        }
     }
 }

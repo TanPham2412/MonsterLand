@@ -7,6 +7,7 @@ import java.util.Objects;
 public class StoryCastle {
     GameScreen gameScreen;
     boolean knightDead = false;
+    boolean banditDead = false;
     public StoryCastle(GameScreen gameScreen){
         this.gameScreen = gameScreen;
     }
@@ -140,23 +141,29 @@ public class StoryCastle {
         gameScreen.story.resetMonsterText();
     }
     public void intoAlley(){
-        gameScreen.story.nextPosition = "banditKnife";
-        gameScreen.story.nextPositionTwo = "run";
-        gameScreen.gameImageView.setImageResource(R.drawable.bandit);
-        gameScreen.gameTextView.setText("Trước mặt bạn, tên côn đồ đứng chắn đường, ánh mắt đầy thách thức và nụ cười nhếch mép. Không gian xung quanh có vẻ tĩnh lặng, nhưng bạn biết hắn có thể gây rắc rối bất cứ lúc nào.\n" + "\n" + "Bạn sẽ đối đầu với hắn hay tìm cách lẩn tránh ");
-        gameScreen.monster.bandit();
+        if (!banditDead) {
+            gameScreen.story.nextPosition = "banditKnife";
+            gameScreen.story.nextPositionTwo = "run";
+            gameScreen.gameImageView.setImageResource(R.drawable.bandit);
+            gameScreen.gameTextView.setText("Trước mặt bạn, tên côn đồ đứng chắn đường, ánh mắt đầy thách thức và nụ cười nhếch mép. Không gian xung quanh có vẻ tĩnh lặng, nhưng bạn biết hắn có thể gây rắc rối bất cứ lúc nào.\n" + "\n" + "Bạn sẽ đối đầu với hắn hay tìm cách lẩn tránh ");
+            gameScreen.monster.bandit();
 
-        gameScreen.button1.setText("Đánh lén (50% cơ hội)");
-        gameScreen.button2.setText("Lẩn tránh (70% cơ hội)");
-        gameScreen.button3.setText("");
+            gameScreen.button1.setText("Đánh lén (50% cơ hội)");
+            gameScreen.button2.setText("Lẩn tránh (70% cơ hội)");
+            gameScreen.button3.setText("");
 
-        gameScreen.story.showAllButton();
+            gameScreen.story.showAllButton();
 
-        gameScreen.story.nextPosition1 = "sneakAttack";
-        gameScreen.story.nextPosition2 = "runBeforeAttack";
-        gameScreen.story.invisible1Button();
+            gameScreen.story.nextPosition1 = "sneakAttack";
+            gameScreen.story.nextPosition2 = "runBeforeAttack";
+            gameScreen.story.invisible1Button();
 
-        gameScreen.story.savePosition = "intoAlley";
+            gameScreen.story.savePosition = "intoAlley";
+        }
+        else {
+            intoAlley1();
+            gameScreen.gameTextView.setText("Bạn quay lại con hẻm tối tăm nơi vừa diễn ra trận chiến với tên côn đồ. Không khí vẫn còn vương mùi sắt của máu và sự căng thẳng chưa tan hết. Ở sâu bên trong, bóng dáng kẻ thần bí ấy vẫn lặng lẽ ẩn nấp, đang quan sát từng cử động của bạn");
+        }
     }
     public void sneakAttack(){
         gameScreen.story.nextPosition = "banditKnife";
@@ -284,7 +291,6 @@ public class StoryCastle {
         if (gameScreen.battle.randomPercent <= 3){
             gameScreen.gameImageView.setImageResource(R.drawable.waysign);
             gameScreen.gameTextView.setText("Bạn đã quay lại trước con hẻm, nơi vẫn còn những dấu vết đẫm máu. Bầu không khí tĩnh lặng, nhưng sự nguy hiểm vẫn còn rình rập.\n" + "\n" + "Bạn sẽ vào hẻm một lần nữa để đối mặt với những kẻ du côn, hay bạn sẽ tìm một con đường khác để tránh xa mối nguy này?");
-
             gameScreen.button1.setText("Đi vào hẻm");
             gameScreen.button2.setText("Đi về phía trước");
             gameScreen.button3.setText("");
@@ -309,6 +315,25 @@ public class StoryCastle {
             gameScreen.story.invisible2Button();
         }
         gameScreen.story.savePosition = "run";
+    }
+
+    public void run1(){
+        gameScreen.gameImageView.setImageResource(R.drawable.waysign);
+        gameScreen.gameTextView.setText("Bạn đã quay lại trước con hẻm, nơi vẫn còn những dấu vết đẫm máu. Bầu không khí tĩnh lặng, nhưng sự nguy hiểm vẫn còn rình rập.\n" + "\n" + "Bạn sẽ vào hẻm một lần nữa để đối mặt với những kẻ du côn, hay bạn sẽ tìm một con đường khác để tránh xa mối nguy này?");
+
+        gameScreen.button1.setText("Đi vào hẻm");
+        gameScreen.button2.setText("Đi về phía trước");
+        gameScreen.button3.setText("");
+
+        gameScreen.story.showAllButton();
+
+        gameScreen.story.nextPosition1 = "intoAlley";
+        gameScreen.story.nextPosition2 = "keepGoing";
+        gameScreen.story.invisible1Button();
+
+        gameScreen.story.resetMonsterText();
+
+        gameScreen.story.savePosition = "run1";
     }
     public void runBeforeAttack(){
         gameScreen.story.nextPosition = "banditKnife";
@@ -346,6 +371,8 @@ public class StoryCastle {
         gameScreen.gameImageView.setImageResource(R.drawable.banditknife);
         gameScreen.gameTextView.setText("Sau một cuộc giao đấu căng thẳng, bạn cuối cùng cũng tiêu diệt được tên côn đồ. Hắn gục xuống, thở dốc và không còn khả năng phản kháng. Khi kiểm tra thi thể của hắn, bạn tìm thấy một con dao sắc bén được giấu kỹ trong áo hắn. Con dao có vẻ là một công cụ hữu ích trong hành trình tiếp theo của bạn, nên bạn quyết định cầm lấy nó.");
         gameScreen.player.playerUseBanditKnife();
+
+        banditDead = true;
 
         gameScreen.story.nextStory();
 
@@ -391,13 +418,13 @@ public class StoryCastle {
 
         gameScreen.button1.setText("Tấn công");
         gameScreen.button2.setText("Chạy qua cánh cửa");
-        gameScreen.button3.setText("");
+        gameScreen.button3.setText("Quay lại");
 
         gameScreen.story.showAllButton();
 
         gameScreen.story.nextPosition1 = "attack";
         gameScreen.story.nextPosition2 = gameScreen.story.nextPosition;
-        gameScreen.story.invisible1Button();
+        gameScreen.story.nextPosition3 = "run1";
 
         gameScreen.story.savePosition = "intoAlley1";
         gameScreen.story.resetMonsterText();
@@ -485,8 +512,6 @@ public class StoryCastle {
         gameScreen.gameImageView.setImageResource(R.drawable.leatherarmor);
         gameScreen.gameTextView.setText("Bạn trang bị bộ giáp da thành công, cảm nhận lớp bảo vệ mới che chắn cơ thể. Với nó, sát thương bạn nhận vào sẽ giảm đi một phần, tăng thêm cơ hội sống sót.\n" + "\n" + "Hít một hơi thật sâu, bạn tiếp tục tiến bước vào con đường phía trước, nơi hiểm nguy vẫn đang rình rập");
         gameScreen.player.leatherArmor = true;
-        gameScreen.player.playerMaxHp += 20;
-        gameScreen.player.playerHp += 20;
         gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
 
         if(gameScreen.player.playerHp > gameScreen.player.playerMaxHp){

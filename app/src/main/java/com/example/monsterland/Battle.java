@@ -59,7 +59,6 @@ public class Battle {
     }
 
     public void attack() {
-        flashRedScreen();
         random();
         gameScreen.player.playerAttack = gameScreen.player.minAtk + random.nextInt(gameScreen.player.maxAtk);
         gameScreen.monster.monsterHP -= gameScreen.player.playerAttack;
@@ -69,11 +68,12 @@ public class Battle {
 
         String attackMessage = generateAttackMessage(gameScreen.player.playerAttack, gameScreen.monster.monterAttack);
 
-        if (gameScreen.player.smallShield && randomPercent <= 3) {
-            gameScreen.gameTextView.setText("Cú đánh của bạn gây ra " + gameScreen.player.playerAttack + " sát thương! Đối thủ bị đẩy lùi một chút.\n\n" + "Hắn cố gắng tấn công lại, nhưng chiếc khiên của bạn đã đỡ trọn đòn đánh, giữ bạn an toàn.");
-        } else {
+        gameScreen.player.playerUseShield();
+        if(gameScreen.monster.monterAttack != 0){
+            flashRedScreen();
             gameScreen.gameTextView.setText(attackMessage);
         }
+
         gameScreen.playerHPTextView.setText("HP: " + gameScreen.player.playerHp);
         gameScreen.monsterHPTextView.setText("HP: " + gameScreen.monster.monsterHP);
     }

@@ -92,6 +92,9 @@ public class Story {
             case "run":
                 gameScreen.storyCastle.run();
                 break;
+            case "run1":
+                gameScreen.storyCastle.run1();
+                break;
             case "runBeforeAttack":
                 gameScreen.storyCastle.runBeforeAttack();
                 break;
