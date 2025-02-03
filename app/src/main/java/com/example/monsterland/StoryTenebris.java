@@ -2,8 +2,6 @@ package com.example.monsterland;
 
 import android.annotation.SuppressLint;
 import android.view.View;
-
-import java.util.Objects;
 @SuppressLint("SetTextI18n")
 
 public class StoryTenebris {
