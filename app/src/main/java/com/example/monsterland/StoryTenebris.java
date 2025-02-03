@@ -506,9 +506,11 @@ public class StoryTenebris {
         gameScreen.button1.setText(">");
         gameScreen.button2.setText("");
         gameScreen.button3.setText("");
+
         gameScreen.story.nextPosition1 = "";
         gameScreen.story.nextPosition2 = "";
         gameScreen.story.nextPosition3 = "";
+
         gameScreen.button2.setVisibility(View.INVISIBLE);
         gameScreen.button3.setVisibility(View.INVISIBLE);
         gameScreen.story.savePosition = "helpGoblin";
@@ -535,7 +537,7 @@ public class StoryTenebris {
             kingGoblin();
             gameScreen.monster.elderGoblin();
             gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-            gameScreen.story.nextPosition = "elderGoblinDrop";
+            gameScreen.story.nextPosition = "kingGoblinDrop";
             gameScreen.gameTextView.setText("Bạn quyết định không giúp goblin, từ chối chia sẻ thảo dược. Với ánh mắt đầy phẫn nộ, goblin chiến binh rít lên: 'Ngươi sẽ hối hận vì điều này!'\n\n" + "Hắn rút vũ khí ra, lao tới với ý định cướp lấy thảo dược bằng vũ lực. Trận chiến nảy lửa sắp bắt đầu, và bạn siết chặt tay chuẩn bị đối đầu với kẻ thù thù địch.");
         }
         gameScreen.story.savePosition = "noHelpGoblin";
@@ -543,9 +545,9 @@ public class StoryTenebris {
 
     public void kingGoblin(){
         gameScreen.story.nextPosition = "kingGoblinDrop";
+        gameScreen.monster.kingGoblin();
+        gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
         if (boneDart > 0){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
-            gameScreen.monster.kingGoblin();
             gameScreen.gameTextView.setText("Goblin nhìn bạn với vẻ căm hận, tiếng gầm gừ đầy giận dữ vang vọng khắp khu rừng. Bạn cảm nhận rõ ràng rằng cuộc đối đầu này là không thể tránh khỏi, và chỉ có một trong hai người rời khỏi nơi đây còn sống.");
             gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
 
@@ -564,7 +566,6 @@ public class StoryTenebris {
             gameScreen.button3.setVisibility(View.INVISIBLE);
         }
         else {
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
             gameScreen.monster.kingGoblin();
             gameScreen.gameTextView.setText("Goblin nhìn bạn với vẻ căm hận, tiếng gầm gừ đầy giận dữ vang vọng khắp khu rừng. Bạn cảm nhận rõ ràng rằng cuộc đối đầu này là không thể tránh khỏi, và chỉ có một trong hai người rời khỏi nơi đây còn sống.");
             gameScreen.playerHPTextView.setText("HP: "+gameScreen.player.playerHp+ "/"+gameScreen.player.playerMaxHp);
@@ -609,11 +610,6 @@ public class StoryTenebris {
     }
 
     public void boneDart(){
-        if (Objects.equals(gameScreen.story.nextPosition, "elderGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-        } else if( Objects.equals(gameScreen.story.nextPosition, "kingGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
-        }
         gameScreen.battle.boneDart();
         if(gameScreen.player.playerHp <=0){
             gameScreen.button1.setText("Bạn đã bị đánh bại!!!");
@@ -674,11 +670,6 @@ public class StoryTenebris {
 
     }
     public void winBoneDart(){
-        if (Objects.equals(gameScreen.story.nextPosition, "elderGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-        } else if( Objects.equals(gameScreen.story.nextPosition, "kingGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
-        }
         gameScreen.button1.setText(">");
         gameScreen.button2.setText("");
         gameScreen.button3.setText("");
@@ -697,11 +688,6 @@ public class StoryTenebris {
     }
 
     public void deadBoneDart(){
-        if (Objects.equals(gameScreen.story.nextPosition, "elderGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-        } else if( Objects.equals(gameScreen.story.nextPosition, "kingGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
-        }
         gameScreen.button1.setText("Bạn đã bị đánh bại!!!");
         gameScreen.button2.setText("");
         gameScreen.button3.setText("");
@@ -715,11 +701,6 @@ public class StoryTenebris {
     }
 
     public void waitBoneDart(){
-        if (Objects.equals(gameScreen.story.nextPosition, "elderGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-        } else if( Objects.equals(gameScreen.story.nextPosition, "kingGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
-        }
         if(boneDart > 0){
             gameScreen.button1.setText("Tấn công");
             gameScreen.button2.setText("Dùng phi tiêu xương (x"+boneDart+")");
@@ -746,11 +727,6 @@ public class StoryTenebris {
     }
     public void attack1(){
         gameScreen.battle.attack();
-        if (Objects.equals(gameScreen.story.nextPosition, "elderGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-        } else if( Objects.equals(gameScreen.story.nextPosition, "kingGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
-        }
         if(gameScreen.player.playerHp <=0){
             gameScreen.button1.setText("Bạn đã bị đánh bại!!!");
             gameScreen.button2.setText("");
@@ -815,11 +791,7 @@ public class StoryTenebris {
     }
 
     public void deadAttack1(){
-        if (Objects.equals(gameScreen.story.nextPosition, "elderGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-        } else if( Objects.equals(gameScreen.story.nextPosition, "kingGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
-        }
+
         gameScreen.button1.setText("Bạn đã bị đánh bại!!!");
         gameScreen.button2.setText("");
         gameScreen.button3.setText("");
@@ -834,11 +806,7 @@ public class StoryTenebris {
     }
 
     public void winAttack1(){
-        if (Objects.equals(gameScreen.story.nextPosition, "elderGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-        } else if( Objects.equals(gameScreen.story.nextPosition, "kingGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
-        }
+
         gameScreen.button1.setText(">");
         gameScreen.button2.setText("");
         gameScreen.button3.setText("");
@@ -859,11 +827,7 @@ public class StoryTenebris {
     }
 
     public void waitAttack1(){
-        if (Objects.equals(gameScreen.story.nextPosition, "elderGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinelder);
-        } else if( Objects.equals(gameScreen.story.nextPosition, "kingGoblinDrop")){
-            gameScreen.gameImageView.setImageResource(R.drawable.goblinking);
-        }
+
         if(boneDart > 0){
             gameScreen.button1.setText("Tấn công");
             gameScreen.button2.setText("Dùng phi tiêu xương (x"+boneDart+")");

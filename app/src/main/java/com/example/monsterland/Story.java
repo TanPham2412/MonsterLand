@@ -254,6 +254,9 @@ public class Story {
             case "distract":
                 gameScreen.storyTenebris.distract();
                 break;
+            case "kingGoblinDrop":
+                gameScreen.storyTenebris.kingGoblinDrop();
+                break;
         }
     }
 }

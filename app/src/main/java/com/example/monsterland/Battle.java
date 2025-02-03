@@ -68,7 +68,9 @@ public class Battle {
 
         String attackMessage = generateAttackMessage(gameScreen.player.playerAttack, gameScreen.monster.monterAttack);
 
-        gameScreen.player.playerUseShield();
+        if(gameScreen.player.shield) {
+            gameScreen.player.playerUseShield();
+        }
         if(gameScreen.monster.monterAttack != 0){
             flashRedScreen();
             gameScreen.gameTextView.setText(attackMessage);
